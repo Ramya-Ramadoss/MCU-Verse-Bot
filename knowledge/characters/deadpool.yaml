@@ -1,0 +1,23 @@
+id: "deadpool"
+name: "Wade Wilson"
+aliases: ["Deadpool", "Merc with a Mouth"]
+type: "character"
+biography: "Wade Wilson is a wisecracking mercenary with accelerated healing. His stories are associated with X-Men-adjacent mutants, fourth-wall humor, and multiverse crossover potential."
+powers:
+  - "Accelerated healing"
+  - "Expert sword combat"
+  - "Firearms proficiency"
+  - "Fourth-wall awareness"
+weaknesses:
+  - "Impulsiveness"
+  - "Chaotic decision-making"
+weapons:
+  - "Katanas"
+  - "Pistols"
+affiliations:
+  - "X-Force"
+  - "X-Men allies"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 34
+chronological_year: 2026

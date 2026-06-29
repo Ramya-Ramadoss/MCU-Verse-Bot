@@ -1,0 +1,19 @@
+id: "groot"
+name: "Groot"
+aliases: ["Groot"]
+type: "character"
+biography: "Groot is a Flora colossus and Guardian of the Galaxy. After sacrificing himself, a new Groot grows from a cutting and matures alongside the team."
+powers:
+  - "Regeneration"
+  - "Wood manipulation"
+  - "High durability"
+weaknesses:
+  - "Limited verbal communication"
+weapons:
+  - "Branch growth"
+affiliations:
+  - "Guardians of the Galaxy"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 10
+chronological_year: 2026

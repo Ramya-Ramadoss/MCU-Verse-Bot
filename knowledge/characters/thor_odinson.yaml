@@ -1,0 +1,23 @@
+id: "thor_odinson"
+name: "Thor Odinson"
+aliases: ["Thor", "God of Thunder", "Point Break"]
+type: "character"
+biography: "Thor Odinson is an Asgardian prince and Avenger who learned humility on Earth, fought Loki's invasions, helped battle Thanos, and later joined the Guardians of the Galaxy after the Battle of Earth."
+powers:
+  - "Asgardian physiology"
+  - "Lightning manipulation"
+  - "Long lifespan"
+weaknesses:
+  - "Grief and guilt"
+  - "Impulsiveness"
+weapons:
+  - "Mjolnir"
+  - "Stormbreaker"
+affiliations:
+  - "Avengers"
+  - "Asgard"
+  - "Guardians of the Galaxy"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 4
+chronological_year: 2024

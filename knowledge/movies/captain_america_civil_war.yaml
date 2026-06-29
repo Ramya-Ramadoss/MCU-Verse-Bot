@@ -1,0 +1,20 @@
+id: "captain_america_civil_war"
+title: "Captain America: Civil War"
+type: "movie"
+phase: "Phase 3"
+release_date: "2016-05-06"
+runtime_minutes: 147
+director: "Anthony and Joe Russo"
+synopsis: "Political pressure over the Sokovia Accords divides the Avengers into factions led by Steve Rogers and Tony Stark. The conflict escalates when Bucky Barnes is framed for an attack connected to Helmut Zemo's revenge plot."
+main_villain: "Helmut Zemo"
+timeline_position:
+  chronological_order: 13
+  release_order: 13
+characters_introduced: ["peter_parker", "tchalla"]
+major_events:
+  - "The Sokovia Accords create a legal framework for superhero oversight."
+  - "Steve Rogers protects Bucky Barnes from capture and execution."
+  - "Tony Stark recruits Peter Parker to fight at the Leipzig airport."
+  - "The Avengers split into opposing factions."
+post_credit_scene: "Bucky enters cryostasis in Wakanda, and Peter Parker discovers a Spider-Man signal in his web-shooters."
+spoiler_level: "partial"

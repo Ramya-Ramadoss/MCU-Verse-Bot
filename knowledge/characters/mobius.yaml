@@ -1,0 +1,20 @@
+id: "mobius"
+name: "Mobius M. Mobius"
+aliases: ["Mobius"]
+type: "character"
+biography: "Mobius M. Mobius is a TVA analyst who specializes in Loki variants. He becomes Loki's ally, questions the TVA's purpose, and helps uncover the truth behind its timeline control."
+powers:
+  - "Investigation"
+  - "Temporal analysis"
+  - "TVA fieldwork"
+weaknesses:
+  - "Limited knowledge of his erased past"
+weapons:
+  - "TVA TemPad"
+  - "Time baton"
+affiliations:
+  - "TVA"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 25
+chronological_year: 2012

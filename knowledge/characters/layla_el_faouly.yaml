@@ -1,0 +1,19 @@
+id: "layla_el_faouly"
+name: "Layla El-Faouly"
+aliases: ["Scarlet Scarab"]
+type: "character"
+biography: "Layla El-Faouly is an archaeologist and Marc Spector's wife. She became the temporary avatar of Taweret and fought alongside Moon Knight as the Scarlet Scarab."
+powers:
+  - "Skilled archaeology"
+  - "Combat training"
+  - "Avatar armor and wings"
+weaknesses:
+  - "Distrust caused by Marc's secrets"
+weapons:
+  - "Scarlet Scarab armor"
+affiliations:
+  - "Taweret"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 28
+chronological_year: 2025

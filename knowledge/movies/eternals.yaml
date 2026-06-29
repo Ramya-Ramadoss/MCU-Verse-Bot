@@ -1,0 +1,19 @@
+id: "eternals"
+title: "Eternals"
+type: "movie"
+phase: "Phase 4"
+release_date: "2021-11-05"
+runtime_minutes: 156
+director: "Chloe Zhao"
+synopsis: "The Eternals reunite after centuries apart to confront Deviants and learn the truth about their mission: preparing Earth for the Celestial Tiamut's Emergence."
+main_villain: "Ikaris / Celestial mission conflict"
+timeline_position:
+  chronological_order: 27
+  release_order: 27
+characters_introduced: ["sersi", "ikaris", "thena"]
+major_events:
+  - "The Eternals learn they are synthetic beings serving Celestials."
+  - "Sersi leads a plan to stop the Emergence."
+  - "Arishem judges Earth after Tiamut is stopped."
+post_credit_scene: "Eros and Pip meet the Eternals, and Dane Whitman approaches the Ebony Blade."
+spoiler_level: "full"

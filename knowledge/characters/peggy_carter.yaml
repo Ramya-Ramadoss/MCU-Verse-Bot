@@ -1,0 +1,22 @@
+id: "peggy_carter"
+name: "Peggy Carter"
+aliases: ["Agent Carter", "Captain Carter"]
+type: "character"
+biography: "Peggy Carter was an SSR agent, co-founder of S.H.I.E.L.D., and Steve Rogers' wartime ally. In alternate universes, Peggy becomes Captain Carter after receiving the super soldier serum."
+powers:
+  - "Espionage"
+  - "Leadership"
+  - "Combat training"
+weaknesses:
+  - "Human vulnerability"
+  - "Burden of secrecy"
+weapons:
+  - "SSR sidearm"
+  - "Vibranium shield as Captain Carter variant"
+affiliations:
+  - "SSR"
+  - "S.H.I.E.L.D."
+status: "Deceased in main timeline"
+spoiler_level: "full"
+release_order_index: 5
+chronological_year: 1949

@@ -1,0 +1,11 @@
+id: "tva"
+name: "Time Variance Authority"
+type: "organization"
+summary: "The Time Variance Authority monitors branching timelines and variants. Loki's 2012 variant encounters the TVA after escaping with the Tesseract during the Time Heist."
+known_members:
+  - "Mobius M. Mobius"
+  - "Hunter B-15"
+  - "Loki variant"
+spoiler_level: "full"
+release_order_index: 25
+chronological_year: 2012

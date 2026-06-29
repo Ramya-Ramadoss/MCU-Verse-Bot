@@ -1,0 +1,19 @@
+id: "mantis"
+name: "Mantis"
+aliases: ["Mantis"]
+type: "character"
+biography: "Mantis is an empathic Guardian of the Galaxy who can sense and influence emotions. She was raised around Ego before joining the Guardians and later learns Peter Quill is her half-brother."
+powers:
+  - "Empathy"
+  - "Emotion manipulation"
+  - "Sleep induction"
+weaknesses:
+  - "Naivety from isolation"
+weapons:
+  - "Empathic touch"
+affiliations:
+  - "Guardians of the Galaxy"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 15
+chronological_year: 2026

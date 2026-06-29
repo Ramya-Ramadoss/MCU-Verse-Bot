@@ -1,0 +1,14 @@
+id: "infinity_stones"
+name: "Infinity Stones"
+type: "artifact"
+summary: "The six Infinity Stones are primordial artifacts tied to Space, Mind, Reality, Power, Time, and Soul. When combined in the Infinity Gauntlet, they allow universe-altering actions such as the Snap and the Blip reversal."
+known_wielders:
+  - "Thanos"
+  - "Bruce Banner"
+  - "Tony Stark"
+  - "Doctor Strange"
+  - "Vision"
+  - "Loki"
+spoiler_level: "full"
+release_order_index: 22
+chronological_year: 2023

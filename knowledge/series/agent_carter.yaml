@@ -1,0 +1,15 @@
+id: "agent_carter_series"
+title: "Agent Carter"
+type: "series"
+summary: "Agent Carter follows Peggy Carter after World War II as she works with the SSR, confronts espionage threats, and helps shape the foundations of the intelligence world that later becomes S.H.I.E.L.D."
+main_characters:
+  - "Peggy Carter"
+  - "Howard Stark"
+  - "Edwin Jarvis"
+major_events:
+  - "Peggy investigates stolen Stark technology."
+  - "The SSR navigates post-war espionage."
+  - "Peggy's legacy helps bridge Captain America history and S.H.I.E.L.D."
+spoiler_level: "partial"
+release_order_index: 9
+chronological_year: 1946

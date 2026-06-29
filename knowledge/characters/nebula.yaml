@@ -1,0 +1,21 @@
+id: "nebula"
+name: "Nebula"
+aliases: ["Nebula"]
+type: "character"
+biography: "Nebula is a cybernetically modified daughter of Thanos and sister of Gamora. She evolves from antagonist to Guardian and Avenger ally, helping defeat Thanos during Endgame."
+powers:
+  - "Cybernetic enhancements"
+  - "Combat training"
+  - "High pain tolerance"
+weaknesses:
+  - "Trauma from Thanos"
+  - "History of rivalry with Gamora"
+weapons:
+  - "Electroshock batons"
+affiliations:
+  - "Guardians of the Galaxy"
+  - "Avengers allies"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 10
+chronological_year: 2026

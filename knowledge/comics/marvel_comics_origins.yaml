@@ -1,0 +1,11 @@
+id: "marvel_comics_origins"
+title: "Marvel Comics Origin Context"
+type: "comics"
+summary: "Many MCU characters originate from Marvel Comics but are adapted differently for screen continuity. Comics knowledge is useful for explaining source concepts, alternate teams, aliases, and variant interpretations without assuming the comics and MCU are identical."
+important_notes:
+  - "MCU continuity is separate from mainline Marvel Comics continuity."
+  - "Characters such as X-Men, Deadpool, Wolverine, Ms. Marvel, Moon Knight, Eternals, and Guardians have long comic histories."
+  - "Comic origins can explain names, teams, powers, and artifacts, but screen answers should cite MCU context when possible."
+spoiler_level: "none"
+release_order_index: 0
+chronological_year: 1961

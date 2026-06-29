@@ -1,0 +1,20 @@
+id: "iron_man"
+title: "Iron Man"
+type: "movie"
+phase: "Phase 1"
+release_date: "2008-05-02"
+runtime_minutes: 126
+director: "Jon Favreau"
+synopsis: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil."
+main_villain: "Obadiah Stane"
+timeline_position:
+  chronological_order: 3
+  release_order: 1
+characters_introduced: ["tony_stark", "pepper_potts", "james_rhodes", "obadiah_stane", "nick_fury"]
+major_events:
+  - "Tony Stark builds the Mark I armor in captivity."
+  - "Stark shuts down Stark Industries' weapons division."
+  - "Stark defeats Obadiah Stane."
+  - "Stark reveals himself as Iron Man in a press conference."
+post_credit_scene: "Nick Fury visits Tony Stark and introduces the Avengers Initiative."
+spoiler_level: "none"

@@ -1,0 +1,17 @@
+id: "wandavision"
+title: "WandaVision"
+type: "series"
+summary: "WandaVision follows Wanda Maximoff and Vision inside the Westview anomaly, where Wanda's grief creates a sitcom-like reality. The series introduces her identity as the Scarlet Witch."
+main_characters:
+  - "Wanda Maximoff"
+  - "Vision"
+  - "Agatha Harkness"
+  - "Monica Rambeau"
+major_events:
+  - "Wanda creates the Hex around Westview."
+  - "Monica Rambeau gains altered abilities."
+  - "Agatha identifies Wanda as the Scarlet Witch."
+  - "Wanda releases Westview and loses Vision and her children."
+spoiler_level: "full"
+release_order_index: 24
+chronological_year: 2023

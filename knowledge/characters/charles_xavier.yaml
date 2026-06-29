@@ -1,0 +1,21 @@
+id: "charles_xavier"
+name: "Charles Xavier"
+aliases: ["Professor X"]
+type: "character"
+biography: "Charles Xavier is a powerful telepath and founder of the X-Men. A multiverse variant appears as a member of the Illuminati, connecting X-Men legacy concepts to MCU multiverse storytelling."
+powers:
+  - "Telepathy"
+  - "Mind communication"
+  - "Psychic projection"
+weaknesses:
+  - "Physical vulnerability"
+  - "Idealism"
+weapons:
+  - "Cerebro"
+affiliations:
+  - "X-Men"
+  - "Illuminati variant"
+status: "Variant dependent"
+spoiler_level: "full"
+release_order_index: 29
+chronological_year: 2025

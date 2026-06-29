@@ -1,0 +1,21 @@
+id: "wolverine"
+name: "Logan"
+aliases: ["Wolverine", "James Howlett"]
+type: "character"
+biography: "Logan is a mutant with healing powers, adamantium claws, and a long history with the X-Men. His cinematic continuity intersects with multiverse storytelling around Deadpool and X-Men legacy characters."
+powers:
+  - "Healing factor"
+  - "Adamantium claws"
+  - "Enhanced senses"
+  - "Long lifespan"
+weaknesses:
+  - "Trauma"
+  - "Adamantium poisoning in some timelines"
+weapons:
+  - "Adamantium claws"
+affiliations:
+  - "X-Men"
+status: "Variant dependent"
+spoiler_level: "full"
+release_order_index: 34
+chronological_year: 2026

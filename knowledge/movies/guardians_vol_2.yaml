@@ -1,0 +1,19 @@
+id: "guardians_vol_2"
+title: "Guardians of the Galaxy Vol. 2"
+type: "movie"
+phase: "Phase 3"
+release_date: "2017-05-05"
+runtime_minutes: 136
+director: "James Gunn"
+synopsis: "The Guardians encounter Ego, Peter Quill's Celestial father, and discover his plan to remake the universe through Expansion."
+main_villain: "Ego"
+timeline_position:
+  chronological_order: 11
+  release_order: 15
+characters_introduced: ["mantis"]
+major_events:
+  - "Peter learns Ego is his father."
+  - "Mantis joins the Guardians."
+  - "Yondu sacrifices himself to save Peter."
+post_credit_scene: "Multiple scenes include teenage Groot and Adam Warlock setup."
+spoiler_level: "partial"

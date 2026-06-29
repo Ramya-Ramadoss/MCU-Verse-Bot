@@ -1,0 +1,19 @@
+id: "guardians_vol_3"
+title: "Guardians of the Galaxy Vol. 3"
+type: "movie"
+phase: "Phase 5"
+release_date: "2023-05-05"
+runtime_minutes: 150
+director: "James Gunn"
+synopsis: "The Guardians fight the High Evolutionary while Rocket's traumatic origin is revealed and the team reaches an emotional turning point."
+main_villain: "High Evolutionary"
+timeline_position:
+  chronological_order: 32
+  release_order: 32
+characters_introduced: ["adam_warlock"]
+major_events:
+  - "Rocket's origin as Subject 89P13 is revealed."
+  - "The Guardians save children and captive animals from the High Evolutionary."
+  - "The original team separates into new life paths."
+post_credit_scene: "A new Guardians lineup forms, and Peter Quill returns to Earth."
+spoiler_level: "full"

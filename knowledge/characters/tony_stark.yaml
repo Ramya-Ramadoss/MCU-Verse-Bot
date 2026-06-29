@@ -1,0 +1,24 @@
+id: "tony_stark"
+name: "Tony Stark"
+aliases: ["Iron Man", "The Mechanic", "Shellhead"]
+type: "character"
+biography: "Tony Stark was a genius, billionaire, playboy, and philanthropist who co-founded the Avengers. After being captured by the Ten Rings, he created the Iron Man suit of armor to escape and decided to protect the world. He eventually sacrificed himself to defeat Thanos in Avengers: Endgame."
+powers:
+  - "Genius-level Intellect"
+  - "Master Engineer & Inventor"
+  - "Expert Tactician"
+weaknesses:
+  - "PTSD"
+  - "Arrogance"
+  - "Obsessive nature"
+weapons:
+  - "Iron Man Armors (Mark I to Mark LXXXV)"
+  - "Repulsor Rays & Unibeam"
+  - "Nanotech Weaponry"
+affiliations:
+  - "Avengers"
+  - "Stark Industries"
+status: "Deceased"
+spoiler_level: "full"
+release_order_index: 1
+chronological_year: 2023

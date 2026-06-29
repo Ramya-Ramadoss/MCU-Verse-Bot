@@ -1,0 +1,21 @@
+id: "shang_chi"
+name: "Shang-Chi"
+aliases: ["Shaun"]
+type: "character"
+biography: "Shang-Chi is the son of Xu Wenwu and a master martial artist who escaped the Ten Rings organization. He later claimed the Ten Rings artifacts and helped protect Ta Lo from the Dweller-in-Darkness."
+powers:
+  - "Elite martial arts"
+  - "Ten Rings mastery"
+  - "Acrobatics"
+weaknesses:
+  - "Family trauma"
+  - "Reluctance to confront his past"
+weapons:
+  - "Ten Rings"
+affiliations:
+  - "Ta Lo"
+  - "Avengers allies"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 26
+chronological_year: 2024

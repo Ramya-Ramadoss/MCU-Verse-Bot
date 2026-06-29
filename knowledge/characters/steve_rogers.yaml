@@ -1,0 +1,23 @@
+id: "steve_rogers"
+name: "Steve Rogers"
+aliases: ["Captain America", "Cap"]
+type: "character"
+biography: "Steve Rogers was transformed by the super soldier serum during World War II and became Captain America. He helped found the Avengers, opposed the Sokovia Accords during the Avengers' split, and returned the Infinity Stones after the Time Heist."
+powers:
+  - "Super soldier physiology"
+  - "Enhanced strength, speed, and endurance"
+  - "Expert hand-to-hand combat"
+weaknesses:
+  - "Loyalty can override strategic caution"
+  - "Physically mortal despite enhancements"
+weapons:
+  - "Vibranium shield"
+  - "Mjolnir during the Battle of Earth"
+affiliations:
+  - "Avengers"
+  - "S.H.I.E.L.D."
+  - "Howling Commandos"
+status: "Retired"
+spoiler_level: "full"
+release_order_index: 5
+chronological_year: 2023

@@ -1,0 +1,12 @@
+id: "quantum_realm"
+name: "Quantum Realm"
+type: "location"
+summary: "The Quantum Realm is a subatomic dimension accessed through Pym particle technology. It trapped Janet van Dyne, later trapped Scott Lang, enabled the Avengers' Time Heist, and became central to Kang's exile."
+notable_events:
+  - "Janet van Dyne survives decades in the Quantum Realm."
+  - "Scott Lang escapes and proposes time travel."
+  - "The Avengers use Quantum Realm travel for the Time Heist."
+  - "Kang is exiled in the Quantum Realm."
+spoiler_level: "full"
+release_order_index: 22
+chronological_year: 2025

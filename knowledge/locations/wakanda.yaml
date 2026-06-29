@@ -1,0 +1,11 @@
+id: "wakanda"
+name: "Wakanda"
+type: "location"
+summary: "Wakanda is an advanced African nation built around vibranium resources. It is home to the Black Panther mantle, the Dora Milaje, Shuri's technology lab, and major conflicts involving Killmonger, Thanos, and Talokan."
+notable_events:
+  - "T'Challa opens Wakanda to the world."
+  - "The Battle of Wakanda occurs during Avengers: Infinity War."
+  - "Shuri becomes Black Panther during conflict with Talokan."
+spoiler_level: "partial"
+release_order_index: 18
+chronological_year: 2025

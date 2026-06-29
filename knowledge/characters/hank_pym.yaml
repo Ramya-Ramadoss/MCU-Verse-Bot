@@ -1,0 +1,21 @@
+id: "hank_pym"
+name: "Hank Pym"
+aliases: ["Original Ant-Man"]
+type: "character"
+biography: "Hank Pym is the scientist who discovered Pym particles and created the original Ant-Man technology. He trained Scott Lang, rescued Janet from the Quantum Realm, and helped preserve his technology from misuse."
+powers:
+  - "Scientific genius"
+  - "Pym particle mastery"
+weaknesses:
+  - "Distrust of institutions"
+  - "Protectiveness over his inventions"
+weapons:
+  - "Ant-Man suit"
+  - "Pym particle technology"
+affiliations:
+  - "Pym family"
+  - "Former S.H.I.E.L.D."
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 12
+chronological_year: 2025

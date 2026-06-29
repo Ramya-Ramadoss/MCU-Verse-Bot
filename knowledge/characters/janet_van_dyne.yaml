@@ -1,0 +1,19 @@
+id: "janet_van_dyne"
+name: "Janet van Dyne"
+aliases: ["Original Wasp"]
+type: "character"
+biography: "Janet van Dyne was the original Wasp and spent decades trapped in the Quantum Realm. Her survival reshaped the Pym family's understanding of the realm and later connected them to Kang's history there."
+powers:
+  - "Quantum Realm adaptation"
+  - "Wasp suit expertise"
+weaknesses:
+  - "Trauma from isolation"
+  - "Secrets about the Quantum Realm"
+weapons:
+  - "Wasp technology"
+affiliations:
+  - "Pym family"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 20
+chronological_year: 2025

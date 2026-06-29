@@ -1,0 +1,19 @@
+id: "sersi"
+name: "Sersi"
+aliases: ["Sersi"]
+type: "character"
+biography: "Sersi is an Eternal who loves humanity and can transform matter. She leads the effort to stop the Emergence and protect Earth from Celestial destruction."
+powers:
+  - "Matter transmutation"
+  - "Immortality"
+  - "Cosmic energy"
+weaknesses:
+  - "Attachment to humanity"
+weapons:
+  - "Transmutation touch"
+affiliations:
+  - "Eternals"
+status: "Taken by Arishem"
+spoiler_level: "full"
+release_order_index: 27
+chronological_year: 2024

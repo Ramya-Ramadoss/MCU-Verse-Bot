@@ -1,0 +1,20 @@
+id: "drax"
+name: "Drax"
+aliases: ["Drax the Destroyer"]
+type: "character"
+biography: "Drax is a Guardian of the Galaxy whose family was killed by forces connected to Thanos and Ronan. His literal thinking and combat strength make him a distinctive part of the team."
+powers:
+  - "Superhuman strength"
+  - "Knife combat"
+  - "Durability"
+weaknesses:
+  - "Literal interpretation"
+  - "Grief"
+weapons:
+  - "Twin knives"
+affiliations:
+  - "Guardians of the Galaxy"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 10
+chronological_year: 2026

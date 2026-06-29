@@ -1,0 +1,19 @@
+id: "ant_man_quantumania"
+title: "Ant-Man and the Wasp: Quantumania"
+type: "movie"
+phase: "Phase 5"
+release_date: "2023-02-17"
+runtime_minutes: 125
+director: "Peyton Reed"
+synopsis: "Scott Lang, Hope van Dyne, Cassie Lang, Hank Pym, and Janet van Dyne are pulled into the Quantum Realm and confront Kang the Conqueror."
+main_villain: "Kang the Conqueror"
+timeline_position:
+  chronological_order: 31
+  release_order: 31
+characters_introduced: ["kang_the_conqueror"]
+major_events:
+  - "The Ant-Man family enters the Quantum Realm."
+  - "Janet reveals her past with Kang."
+  - "Scott and Hope fight Kang to escape."
+post_credit_scene: "Kang variants gather, and Loki and Mobius observe Victor Timely."
+spoiler_level: "full"

@@ -1,0 +1,15 @@
+id: "guardians_of_the_galaxy"
+name: "Guardians of the Galaxy"
+type: "team"
+summary: "The Guardians of the Galaxy are a found-family spacefaring team formed around Peter Quill, Gamora, Drax, Rocket, and Groot, later joined by Mantis, Nebula, Kraglin, Cosmo, and others."
+members:
+  - "Peter Quill"
+  - "Gamora"
+  - "Drax"
+  - "Rocket"
+  - "Groot"
+  - "Mantis"
+  - "Nebula"
+spoiler_level: "partial"
+release_order_index: 10
+chronological_year: 2014

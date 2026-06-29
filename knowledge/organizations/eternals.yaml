@@ -1,0 +1,18 @@
+id: "eternals_team"
+name: "Eternals"
+type: "team"
+summary: "The Eternals are synthetic cosmic beings created by Celestials to protect intelligent life from Deviants until a planet is ready for a Celestial Emergence."
+members:
+  - "Sersi"
+  - "Ikaris"
+  - "Thena"
+  - "Ajak"
+  - "Kingo"
+  - "Phastos"
+  - "Makkari"
+  - "Druig"
+  - "Sprite"
+  - "Gilgamesh"
+spoiler_level: "full"
+release_order_index: 27
+chronological_year: 2024

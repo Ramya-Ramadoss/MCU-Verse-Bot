@@ -1,0 +1,22 @@
+id: "natasha_romanoff"
+name: "Natasha Romanoff"
+aliases: ["Black Widow", "Natalie Rushman"]
+type: "character"
+biography: "Natasha Romanoff was a former Red Room assassin who became a S.H.I.E.L.D. agent and founding Avenger. During the Time Heist, she sacrificed herself on Vormir so the Avengers could obtain the Soul Stone."
+powers:
+  - "Elite espionage"
+  - "Master martial artist"
+  - "Expert marksman"
+weaknesses:
+  - "No superhuman durability"
+  - "Burdened by her Red Room past"
+weapons:
+  - "Widow's Bite"
+  - "Batons"
+affiliations:
+  - "Avengers"
+  - "S.H.I.E.L.D."
+status: "Deceased"
+spoiler_level: "full"
+release_order_index: 3
+chronological_year: 2023

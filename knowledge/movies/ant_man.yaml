@@ -1,0 +1,19 @@
+id: "ant_man"
+title: "Ant-Man"
+type: "movie"
+phase: "Phase 2"
+release_date: "2015-07-17"
+runtime_minutes: 117
+director: "Peyton Reed"
+synopsis: "Scott Lang is recruited by Hank Pym and Hope van Dyne to stop Darren Cross from weaponizing shrinking technology as the Yellowjacket suit."
+main_villain: "Darren Cross"
+timeline_position:
+  chronological_order: 12
+  release_order: 12
+characters_introduced: ["scott_lang", "hope_van_dyne", "hank_pym"]
+major_events:
+  - "Scott Lang becomes Ant-Man."
+  - "Scott enters the Quantum Realm and survives."
+  - "Hope is teased as the future Wasp."
+post_credit_scene: "Hank reveals the Wasp suit to Hope, and Sam Wilson mentions Ant-Man to Steve Rogers."
+spoiler_level: "partial"

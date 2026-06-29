@@ -1,0 +1,10 @@
+id: "ten_rings"
+name: "Ten Rings"
+type: "artifact"
+summary: "The Ten Rings are ancient bracelet-like weapons used by Xu Wenwu and later Shang-Chi. They grant powerful energy attacks, enhanced movement, and mysterious signals of unknown origin."
+known_wielders:
+  - "Xu Wenwu"
+  - "Shang-Chi"
+spoiler_level: "full"
+release_order_index: 26
+chronological_year: 2024

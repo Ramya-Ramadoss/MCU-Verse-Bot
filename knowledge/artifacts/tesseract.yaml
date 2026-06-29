@@ -1,0 +1,12 @@
+id: "tesseract"
+name: "Tesseract"
+type: "artifact"
+summary: "The Tesseract housed the Space Stone. It was used by HYDRA, studied by S.H.I.E.L.D., stolen by Loki, retrieved during the Time Heist, and later returned to its proper branch timeline."
+known_wielders:
+  - "Red Skull"
+  - "Loki"
+  - "S.H.I.E.L.D."
+  - "Thanos"
+spoiler_level: "partial"
+release_order_index: 6
+chronological_year: 2012

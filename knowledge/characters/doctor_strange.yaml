@@ -1,0 +1,24 @@
+id: "doctor_strange"
+name: "Stephen Strange"
+aliases: ["Doctor Strange", "Sorcerer Supreme"]
+type: "character"
+biography: "Stephen Strange was a brilliant surgeon who became a master of the mystic arts after a career-ending accident. He protected the Time Stone, helped choose the one path to victory against Thanos, and later confronted multiversal incursions."
+powers:
+  - "Mystic arts"
+  - "Portal creation"
+  - "Astral projection"
+  - "Spell casting"
+weaknesses:
+  - "Arrogance"
+  - "Need for control"
+weapons:
+  - "Cloak of Levitation"
+  - "Sling Ring"
+  - "Eye of Agamotto"
+affiliations:
+  - "Masters of the Mystic Arts"
+  - "Avengers allies"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 14
+chronological_year: 2025

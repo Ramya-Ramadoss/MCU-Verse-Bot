@@ -1,0 +1,13 @@
+id: "x_men"
+name: "X-Men"
+type: "team"
+summary: "The X-Men are a mutant superhero team from Marvel comics and legacy films. In MCU-era storytelling, mutant concepts connect through multiverse appearances, Kamala Khan's mutation reveal, and Deadpool/Wolverine crossover context."
+members:
+  - "Charles Xavier"
+  - "Wolverine"
+  - "Cyclops"
+  - "Jean Grey"
+  - "Storm"
+spoiler_level: "full"
+release_order_index: 34
+chronological_year: 2026

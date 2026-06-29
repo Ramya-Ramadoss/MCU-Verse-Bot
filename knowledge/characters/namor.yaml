@@ -1,0 +1,21 @@
+id: "namor"
+name: "Namor"
+aliases: ["K'uk'ulkan", "Feathered Serpent God"]
+type: "character"
+biography: "Namor is the ruler of Talokan, an underwater civilization empowered by a vibranium-influenced herb. He entered conflict with Wakanda after the world began searching for vibranium beyond Wakanda."
+powers:
+  - "Superhuman strength"
+  - "Aquatic adaptation"
+  - "Flight using ankle wings"
+  - "Long lifespan"
+weaknesses:
+  - "Dehydration outside water"
+  - "Protective obsession with Talokan"
+weapons:
+  - "Vibranium spear"
+affiliations:
+  - "Talokan"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 30
+chronological_year: 2025

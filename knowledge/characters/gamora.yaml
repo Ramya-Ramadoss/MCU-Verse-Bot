@@ -1,0 +1,21 @@
+id: "gamora"
+name: "Gamora"
+aliases: ["Daughter of Thanos"]
+type: "character"
+biography: "Gamora is a former assassin raised by Thanos who becomes a Guardian of the Galaxy. A 2014 variant later enters the main timeline during the Time Heist aftermath."
+powers:
+  - "Elite assassin training"
+  - "Sword combat"
+  - "Superhuman durability"
+weaknesses:
+  - "Trauma from Thanos"
+  - "Variant displacement"
+weapons:
+  - "Godslayer sword"
+affiliations:
+  - "Guardians of the Galaxy"
+  - "Ravagers"
+status: "Variant alive"
+spoiler_level: "full"
+release_order_index: 10
+chronological_year: 2026

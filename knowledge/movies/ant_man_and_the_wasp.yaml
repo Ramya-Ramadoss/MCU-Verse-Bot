@@ -1,0 +1,19 @@
+id: "ant_man_and_the_wasp"
+title: "Ant-Man and the Wasp"
+type: "movie"
+phase: "Phase 3"
+release_date: "2018-07-06"
+runtime_minutes: 118
+director: "Peyton Reed"
+synopsis: "Scott Lang, Hope van Dyne, and Hank Pym work to rescue Janet van Dyne from the Quantum Realm while avoiding Ghost and federal pursuit."
+main_villain: "Ghost"
+timeline_position:
+  chronological_order: 20
+  release_order: 20
+characters_introduced: ["janet_van_dyne"]
+major_events:
+  - "Hope operates as the Wasp."
+  - "Janet van Dyne is rescued from the Quantum Realm."
+  - "Scott is trapped in the Quantum Realm when the Snap happens."
+post_credit_scene: "Hank, Hope, and Janet are dusted by the Snap while Scott remains trapped."
+spoiler_level: "full"

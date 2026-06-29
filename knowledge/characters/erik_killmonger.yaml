@@ -1,0 +1,21 @@
+id: "erik_killmonger"
+name: "Erik Killmonger"
+aliases: ["N'Jadaka", "Killmonger"]
+type: "character"
+biography: "Erik Killmonger was T'Challa's cousin and a former black-ops soldier who challenged Wakanda's isolationism. He defeated T'Challa in ritual combat, briefly took the throne, and planned to arm oppressed people worldwide with Wakandan weapons."
+powers:
+  - "Elite military training"
+  - "Tactical intelligence"
+  - "Temporary Black Panther enhancement"
+weaknesses:
+  - "Revenge-driven worldview"
+  - "Unresolved generational trauma"
+weapons:
+  - "Vibranium suit"
+  - "Military firearms"
+affiliations:
+  - "Wakandan royal bloodline"
+status: "Deceased"
+spoiler_level: "partial"
+release_order_index: 18
+chronological_year: 2016

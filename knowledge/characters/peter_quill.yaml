@@ -1,0 +1,22 @@
+id: "peter_quill"
+name: "Peter Quill"
+aliases: ["Star-Lord"]
+type: "character"
+biography: "Peter Quill is the half-human leader of the Guardians of the Galaxy. Raised by Ravagers after being abducted from Earth, he forms a found family with Gamora, Drax, Rocket, and Groot."
+powers:
+  - "Skilled pilot"
+  - "Blaster combat"
+  - "Improvisational leadership"
+weaknesses:
+  - "Impulsiveness"
+  - "Grief over family losses"
+weapons:
+  - "Quad blasters"
+  - "Jet boots"
+affiliations:
+  - "Guardians of the Galaxy"
+  - "Ravagers"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 10
+chronological_year: 2026

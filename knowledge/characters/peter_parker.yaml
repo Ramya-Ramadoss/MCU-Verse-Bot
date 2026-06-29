@@ -1,0 +1,21 @@
+id: "peter_parker"
+name: "Peter Parker"
+aliases: ["Spider-Man", "Friendly Neighborhood Spider-Man"]
+type: "character"
+biography: "Peter Parker is a high school student from Queens who gained spider-like abilities after being bitten by a radioactive spider. Mentored by Tony Stark, he became a key ally during the conflict with Thanos and continues protecting New York."
+powers:
+  - "Superhuman Strength & Agility"
+  - "Spider-Sense"
+  - "Wall-Crawling"
+weaknesses:
+  - "Inexperience (early career)"
+  - "Personal responsibilities"
+weapons:
+  - "Web-Shooters"
+  - "Iron Spider Suit (Stark-designed)"
+affiliations:
+  - "Avengers"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 15
+chronological_year: 2024

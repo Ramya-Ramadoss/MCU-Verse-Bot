@@ -1,0 +1,19 @@
+id: "ikaris"
+name: "Ikaris"
+aliases: ["Ikaris"]
+type: "character"
+biography: "Ikaris is an Eternal with flight, strength, and cosmic eye beams. His loyalty to Arishem's mission puts him in conflict with Sersi and the other Eternals."
+powers:
+  - "Flight"
+  - "Cosmic eye beams"
+  - "Superhuman strength"
+weaknesses:
+  - "Rigid loyalty to Celestial purpose"
+weapons:
+  - "Cosmic energy"
+affiliations:
+  - "Eternals"
+status: "Deceased or unknown"
+spoiler_level: "full"
+release_order_index: 27
+chronological_year: 2024

@@ -1,0 +1,16 @@
+id: "battle_of_wakanda"
+name: "Battle of Wakanda"
+type: "event"
+summary: "The Battle of Wakanda was the Avengers' attempt to protect Vision and the Mind Stone from Thanos' forces. Wakanda became the final Earth battlefield before Thanos completed the Infinity Gauntlet."
+participants:
+  - "T'Challa"
+  - "Shuri"
+  - "Steve Rogers"
+  - "Wanda Maximoff"
+  - "Vision"
+  - "Thanos"
+related_movies:
+  - "Avengers: Infinity War"
+spoiler_level: "full"
+release_order_index: 19
+chronological_year: 2018

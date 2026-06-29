@@ -1,0 +1,20 @@
+id: "thena"
+name: "Thena"
+aliases: ["Thena"]
+type: "character"
+biography: "Thena is an Eternal warrior who can manifest cosmic weapons. She suffers from Mahd Wy'ry, fragmented memories caused by repeated Eternal resets."
+powers:
+  - "Cosmic weapon manifestation"
+  - "Elite combat"
+  - "Immortality"
+weaknesses:
+  - "Mahd Wy'ry memory episodes"
+weapons:
+  - "Cosmic blades"
+  - "Cosmic spear"
+affiliations:
+  - "Eternals"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 27
+chronological_year: 2024

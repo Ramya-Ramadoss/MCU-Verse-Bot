@@ -1,0 +1,14 @@
+id: "the_snap"
+name: "The Snap"
+type: "event"
+summary: "The Snap was Thanos' use of the completed Infinity Gauntlet to erase half of all life in the universe at the end of Avengers: Infinity War."
+participants:
+  - "Thanos"
+  - "Avengers"
+  - "Guardians of the Galaxy"
+related_movies:
+  - "Avengers: Infinity War"
+  - "Avengers: Endgame"
+spoiler_level: "full"
+release_order_index: 19
+chronological_year: 2018

@@ -1,0 +1,20 @@
+id: "avengers_infinity_war"
+title: "Avengers: Infinity War"
+type: "movie"
+phase: "Phase 3"
+release_date: "2018-04-27"
+runtime_minutes: 149
+director: "Anthony and Joe Russo"
+synopsis: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe."
+main_villain: "Thanos"
+timeline_position:
+  chronological_order: 21
+  release_order: 19
+characters_introduced: ["ebony_maw", "cull_obsidian", "proxima_midnight", "corvus_glaive"]
+major_events:
+  - "Thanos attacks the Asgardian refugee ship and kills Loki and Heimdall."
+  - "Thanos collects all six Infinity Stones."
+  - "The Avengers and Wakandans fight the Black Order in Wakanda."
+  - "Thanos snaps his fingers, wiping out half of all life in the universe."
+post_credit_scene: "Nick Fury sends a distress signal to Captain Marvel before turning to dust."
+spoiler_level: "full"

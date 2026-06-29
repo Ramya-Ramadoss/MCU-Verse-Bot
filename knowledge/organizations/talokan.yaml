@@ -1,0 +1,11 @@
+id: "talokan"
+name: "Talokan"
+type: "organization"
+summary: "Talokan is an underwater civilization led by Namor. Its people were transformed by a vibranium-influenced plant and fiercely protect their hidden nation from surface-world exploitation."
+known_members:
+  - "Namor"
+  - "Namora"
+  - "Attuma"
+spoiler_level: "full"
+release_order_index: 30
+chronological_year: 2025

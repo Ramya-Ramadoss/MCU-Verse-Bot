@@ -1,0 +1,23 @@
+id: "marc_spector"
+name: "Marc Spector"
+aliases: ["Moon Knight", "Steven Grant", "Jake Lockley"]
+type: "character"
+biography: "Marc Spector is a former mercenary who became the avatar of the Egyptian moon god Khonshu. He shares a body with Steven Grant and Jake Lockley, and his story centers on trauma, identity, and supernatural justice."
+powers:
+  - "Enhanced strength while empowered by Khonshu"
+  - "Combat expertise"
+  - "Healing through divine armor"
+  - "Dissociative identity system"
+weaknesses:
+  - "Severe trauma"
+  - "Conflict between identities"
+  - "Khonshu's manipulation"
+weapons:
+  - "Crescent darts"
+  - "Moon Knight suit"
+affiliations:
+  - "Khonshu"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 28
+chronological_year: 2025

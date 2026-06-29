@@ -1,0 +1,20 @@
+id: "kamala_khan"
+name: "Kamala Khan"
+aliases: ["Ms. Marvel"]
+type: "character"
+biography: "Kamala Khan is a Jersey City teenager and Captain Marvel fan whose bangle unlocks hard-light powers and reveals her connection to the Noor dimension and mutant genetics."
+powers:
+  - "Hard-light constructs"
+  - "Platform creation"
+  - "Energy shaping"
+weaknesses:
+  - "Inexperience"
+  - "Family and school pressures"
+weapons:
+  - "Khan family bangle"
+affiliations:
+  - "The Marvels"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 29
+chronological_year: 2025

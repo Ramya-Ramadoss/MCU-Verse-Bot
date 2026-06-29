@@ -1,0 +1,21 @@
+id: "kang_the_conqueror"
+name: "Kang the Conqueror"
+aliases: ["Kang", "Nathaniel Richards Variant"]
+type: "character"
+biography: "Kang the Conqueror is a powerful multiversal variant associated with advanced temporal technology. One Kang variant was exiled to the Quantum Realm, where he clashed with Ant-Man and the Wasp."
+powers:
+  - "Advanced temporal technology"
+  - "Strategic conquest"
+  - "Energy weaponry"
+weaknesses:
+  - "Reliance on technology"
+  - "Conflict with other variants"
+weapons:
+  - "Kang armor"
+  - "Time chair technology"
+affiliations:
+  - "Kang variants"
+status: "Unknown"
+spoiler_level: "full"
+release_order_index: 31
+chronological_year: 2025

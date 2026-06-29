@@ -1,0 +1,15 @@
+id: "avengers"
+name: "Avengers"
+type: "team"
+summary: "The Avengers are Earth's primary superhero team, originally assembled by Nick Fury to respond to threats too large for individual heroes."
+members:
+  - "Tony Stark"
+  - "Steve Rogers"
+  - "Thor"
+  - "Bruce Banner"
+  - "Natasha Romanoff"
+  - "Clint Barton"
+  - "Peter Parker"
+spoiler_level: "partial"
+release_order_index: 6
+chronological_year: 2012

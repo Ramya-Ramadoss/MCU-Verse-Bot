@@ -1,0 +1,19 @@
+id: "guardians_of_the_galaxy_movie"
+title: "Guardians of the Galaxy"
+type: "movie"
+phase: "Phase 2"
+release_date: "2014-08-01"
+runtime_minutes: 121
+director: "James Gunn"
+synopsis: "Peter Quill, Gamora, Drax, Rocket, and Groot form the Guardians of the Galaxy while stopping Ronan from using the Power Stone against Xandar."
+main_villain: "Ronan the Accuser"
+timeline_position:
+  chronological_order: 10
+  release_order: 10
+characters_introduced: ["peter_quill", "gamora", "rocket", "groot", "drax"]
+major_events:
+  - "The Guardians form as a found family."
+  - "The Power Stone is revealed inside the Orb."
+  - "Groot sacrifices himself to save the team."
+post_credit_scene: "A baby Groot regrows from a cutting."
+spoiler_level: "partial"

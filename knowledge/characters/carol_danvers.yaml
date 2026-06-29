@@ -1,0 +1,21 @@
+id: "carol_danvers"
+name: "Carol Danvers"
+aliases: ["Captain Marvel", "Vers"]
+type: "character"
+biography: "Carol Danvers is a former Air Force pilot whose exposure to Tesseract-powered energy gave her cosmic abilities. She fought the Kree, helped the Skrulls, and later answered Nick Fury's pager after the Snap."
+powers:
+  - "Cosmic energy absorption"
+  - "Flight"
+  - "Superhuman strength"
+  - "Photon blasts"
+weaknesses:
+  - "Distant responsibilities across space"
+weapons:
+  - "Photon energy"
+affiliations:
+  - "Avengers allies"
+  - "Skrull allies"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 21
+chronological_year: 2026

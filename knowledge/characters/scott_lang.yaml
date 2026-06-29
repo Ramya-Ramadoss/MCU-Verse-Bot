@@ -1,0 +1,22 @@
+id: "scott_lang"
+name: "Scott Lang"
+aliases: ["Ant-Man"]
+type: "character"
+biography: "Scott Lang is a former thief who became Ant-Man under Hank Pym's guidance. He helped Team Captain America during Civil War, survived being trapped in the Quantum Realm, and gave the Avengers the idea for the Time Heist."
+powers:
+  - "Size manipulation using Pym particles"
+  - "Ant communication through helmet technology"
+  - "Improvised problem solving"
+weaknesses:
+  - "Limited formal combat training"
+  - "Family vulnerability"
+weapons:
+  - "Ant-Man suit"
+  - "Pym particle discs"
+affiliations:
+  - "Pym family"
+  - "Avengers allies"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 12
+chronological_year: 2025

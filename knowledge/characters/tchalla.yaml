@@ -1,0 +1,24 @@
+id: "tchalla"
+name: "T'Challa"
+aliases: ["Black Panther", "King T'Challa"]
+type: "character"
+biography: "T'Challa was the king of Wakanda and the Black Panther. After his father T'Chaka died, he became king, confronted Erik Killmonger, opened Wakanda to the world, fought in the Battle of Wakanda, and returned after the Blip."
+powers:
+  - "Heart-Shaped Herb enhancement"
+  - "Expert martial artist"
+  - "Strategic leadership"
+  - "Vibranium suit agility"
+weaknesses:
+  - "Burden of kingship"
+  - "Family and national duty"
+weapons:
+  - "Vibranium Black Panther suit"
+  - "Retractable vibranium claws"
+affiliations:
+  - "Wakanda"
+  - "Dora Milaje"
+  - "Avengers allies"
+status: "Deceased"
+spoiler_level: "full"
+release_order_index: 13
+chronological_year: 2024

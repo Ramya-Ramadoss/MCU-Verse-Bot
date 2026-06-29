@@ -1,0 +1,20 @@
+id: "black_panther_wakanda_forever"
+title: "Black Panther: Wakanda Forever"
+type: "movie"
+phase: "Phase 4"
+release_date: "2022-11-11"
+runtime_minutes: 161
+director: "Ryan Coogler"
+synopsis: "Wakanda mourns T'Challa while facing pressure from world powers and conflict with Talokan. Shuri processes grief and becomes the new Black Panther."
+main_villain: "Namor"
+timeline_position:
+  chronological_order: 30
+  release_order: 30
+characters_introduced: ["namor"]
+major_events:
+  - "Wakanda mourns T'Challa."
+  - "Namor reveals Talokan to Shuri."
+  - "Shuri synthesizes a new Heart-Shaped Herb."
+  - "Wakanda and Talokan reach a fragile truce."
+post_credit_scene: "Shuri meets T'Challa's son, Toussaint."
+spoiler_level: "full"

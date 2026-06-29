@@ -1,0 +1,21 @@
+id: "wanda_maximoff"
+name: "Wanda Maximoff"
+aliases: ["Scarlet Witch", "Wanda"]
+type: "character"
+biography: "Wanda Maximoff gained powers from the Mind Stone, joined the Avengers, and later became the Scarlet Witch. Her grief over Vision led to the Westview anomaly and later to multiversal conflict."
+powers:
+  - "Chaos magic"
+  - "Telekinesis"
+  - "Mind manipulation"
+  - "Reality warping"
+weaknesses:
+  - "Grief"
+  - "Darkhold corruption"
+weapons:
+  - "Chaos magic"
+affiliations:
+  - "Avengers"
+status: "Unknown"
+spoiler_level: "full"
+release_order_index: 11
+chronological_year: 2025

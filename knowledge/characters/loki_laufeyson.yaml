@@ -1,0 +1,22 @@
+id: "loki_laufeyson"
+name: "Loki Laufeyson"
+aliases: ["Loki", "God of Mischief"]
+type: "character"
+biography: "Loki Laufeyson is Thor's adoptive brother, a skilled sorcerer, and a recurring catalyst in the MCU. A 2012 variant escaped with the Tesseract during the Time Heist, creating a branch timeline that led him to the TVA."
+powers:
+  - "Illusion magic"
+  - "Shape-shifting"
+  - "Asgardian and Frost Giant physiology"
+weaknesses:
+  - "Ambition"
+  - "Need for validation"
+weapons:
+  - "Scepter"
+  - "Daggers"
+affiliations:
+  - "Asgard"
+  - "TVA"
+status: "Variant active"
+spoiler_level: "full"
+release_order_index: 4
+chronological_year: 2012

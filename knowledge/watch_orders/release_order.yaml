@@ -1,0 +1,29 @@
+id: "release_order"
+title: "MCU Release Order (Phase 1-3 Core)"
+type: "watch_order"
+content: |
+  Recommended release order for core Infinity Saga:
+  1. Iron Man
+  2. The Incredible Hulk
+  3. Iron Man 2
+  4. Thor
+  5. Captain America: The First Avenger
+  6. The Avengers
+  7. Iron Man 3
+  8. Thor: The Dark World
+  9. Captain America: The Winter Soldier
+  10. Guardians of the Galaxy
+  11. Avengers: Age of Ultron
+  12. Ant-Man
+  13. Captain America: Civil War
+  14. Doctor Strange
+  15. Guardians of the Galaxy Vol. 2
+  16. Spider-Man: Homecoming
+  17. Thor: Ragnarok
+  18. Black Panther
+  19. Avengers: Infinity War
+  20. Ant-Man and the Wasp
+  21. Captain Marvel
+  22. Avengers: Endgame
+metadata:
+  spoiler_level: "none"

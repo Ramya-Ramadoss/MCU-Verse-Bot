@@ -1,0 +1,22 @@
+id: "avengers_endgame"
+title: "Avengers: Endgame"
+type: "movie"
+phase: "Phase 3"
+release_date: "2019-04-26"
+runtime_minutes: 181
+director: "Anthony and Joe Russo"
+synopsis: "After the devastating events of Avengers: Infinity War, the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe."
+main_villain: "Thanos"
+timeline_position:
+  chronological_order: 22
+  release_order: 22
+characters_introduced: ["morgan_stark"]
+major_events:
+  - "The remaining Avengers track down Thanos and Thor decapitates him."
+  - "Five years later, Scott Lang escapes the Quantum Realm and proposes a time heist."
+  - "The Avengers retrieve the Infinity Stones from the past."
+  - "Bruce Banner snaps his fingers to restore everyone turned to dust."
+  - "Tony Stark snaps his fingers to defeat Thanos' army, sacrificing his life."
+  - "Steve Rogers returns the stones and decides to live a full life in the past."
+post_credit_scene: "No traditional scene, but the sound of metal clanging (Tony Stark building the Mark I) plays over the Marvel logo."
+spoiler_level: "full"

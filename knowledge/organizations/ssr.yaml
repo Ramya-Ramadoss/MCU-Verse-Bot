@@ -1,0 +1,11 @@
+id: "ssr"
+name: "Strategic Scientific Reserve"
+type: "organization"
+summary: "The SSR was a World War II intelligence and science organization connected to Project Rebirth, Steve Rogers, Peggy Carter, Howard Stark, and the future formation of S.H.I.E.L.D."
+known_members:
+  - "Peggy Carter"
+  - "Howard Stark"
+  - "Chester Phillips"
+spoiler_level: "none"
+release_order_index: 5
+chronological_year: 1945

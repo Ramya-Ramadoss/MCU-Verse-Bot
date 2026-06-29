@@ -1,0 +1,22 @@
+id: "hope_van_dyne"
+name: "Hope van Dyne"
+aliases: ["Wasp"]
+type: "character"
+biography: "Hope van Dyne is Hank Pym and Janet van Dyne's daughter. She became the Wasp, partnered with Scott Lang, and helped protect Pym technology and navigate Quantum Realm threats."
+powers:
+  - "Size manipulation"
+  - "Flight with Wasp suit wings"
+  - "Expert combat training"
+weaknesses:
+  - "Family trauma"
+  - "Dependence on Pym technology"
+weapons:
+  - "Wasp suit"
+  - "Bio-electric blasters"
+affiliations:
+  - "Pym family"
+  - "Avengers allies"
+status: "Alive"
+spoiler_level: "partial"
+release_order_index: 20
+chronological_year: 2025

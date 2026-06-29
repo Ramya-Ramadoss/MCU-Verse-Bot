@@ -1,0 +1,21 @@
+id: "sylvie_laufeydottir"
+name: "Sylvie Laufeydottir"
+aliases: ["Sylvie", "Loki Variant"]
+type: "character"
+biography: "Sylvie is a Loki variant who spent her life fleeing the TVA. She sought revenge against the Time-Keepers and later killed He Who Remains, unleashing branching timelines."
+powers:
+  - "Enchantment magic"
+  - "Illusion and combat skills"
+  - "Variant survival instincts"
+weaknesses:
+  - "Distrust"
+  - "Revenge-driven choices"
+weapons:
+  - "Sword"
+  - "Enchantment"
+affiliations:
+  - "Loki variants"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 25
+chronological_year: 2012

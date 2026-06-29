@@ -1,0 +1,19 @@
+id: "the_avengers"
+title: "The Avengers"
+type: "movie"
+phase: "Phase 1"
+release_date: "2012-05-04"
+runtime_minutes: 143
+director: "Joss Whedon"
+synopsis: "Nick Fury assembles Iron Man, Captain America, Thor, Hulk, Black Widow, and Hawkeye to stop Loki and the Chitauri invasion of New York."
+main_villain: "Loki"
+timeline_position:
+  chronological_order: 6
+  release_order: 6
+characters_introduced: ["thanos"]
+major_events:
+  - "Loki steals the Tesseract and opens a portal above New York."
+  - "The original Avengers team forms."
+  - "Tony Stark redirects a nuclear missile through the portal."
+post_credit_scene: "The Other reports Loki's defeat to Thanos."
+spoiler_level: "partial"

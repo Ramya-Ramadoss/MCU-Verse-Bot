@@ -1,0 +1,19 @@
+id: "deadpool_and_wolverine"
+title: "Deadpool & Wolverine"
+type: "movie"
+phase: "Phase 5"
+release_date: "2024-07-26"
+runtime_minutes: 128
+director: "Shawn Levy"
+synopsis: "Deadpool is pulled into multiverse and TVA-adjacent chaos involving Wolverine variants and legacy Marvel film continuity."
+main_villain: "Cassandra Nova"
+timeline_position:
+  chronological_order: 34
+  release_order: 34
+characters_introduced: ["deadpool", "wolverine"]
+major_events:
+  - "Deadpool intersects with TVA-style multiverse management."
+  - "Wolverine variants become part of the crossover story."
+  - "Legacy Marvel film universes are referenced through multiverse logic."
+post_credit_scene: "Deadpool-style comedic continuity callback."
+spoiler_level: "full"

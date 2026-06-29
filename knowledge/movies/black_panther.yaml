@@ -1,0 +1,20 @@
+id: "black_panther"
+title: "Black Panther"
+type: "movie"
+phase: "Phase 3"
+release_date: "2018-02-16"
+runtime_minutes: 134
+director: "Ryan Coogler"
+synopsis: "T'Challa returns to Wakanda after his father's death and faces a challenge from Erik Killmonger, whose claim to the throne forces Wakanda to confront its isolationist history."
+main_villain: "Erik Killmonger"
+timeline_position:
+  chronological_order: 14
+  release_order: 18
+characters_introduced: ["shuri", "erik_killmonger", "okoye", "nakia"]
+major_events:
+  - "T'Challa becomes king of Wakanda."
+  - "Killmonger defeats T'Challa in ritual combat."
+  - "Shuri, Nakia, and the Dora Milaje help restore T'Challa."
+  - "Wakanda opens outreach centers to the world."
+post_credit_scene: "T'Challa announces Wakanda's outreach at the United Nations and Bucky Barnes recovers in Wakanda."
+spoiler_level: "partial"

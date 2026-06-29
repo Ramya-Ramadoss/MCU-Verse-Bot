@@ -1,0 +1,18 @@
+id: "time_heist"
+name: "Time Heist"
+type: "event"
+summary: "The Time Heist was the Avengers' plan to travel through the Quantum Realm and borrow the Infinity Stones from past points in the timeline to reverse the Snap."
+participants:
+  - "Tony Stark"
+  - "Steve Rogers"
+  - "Bruce Banner"
+  - "Natasha Romanoff"
+  - "Clint Barton"
+  - "Thor"
+  - "Rocket"
+  - "Nebula"
+related_movies:
+  - "Avengers: Endgame"
+spoiler_level: "full"
+release_order_index: 22
+chronological_year: 2023

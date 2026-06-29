@@ -1,0 +1,21 @@
+id: "rocket"
+name: "Rocket"
+aliases: ["Rocket Raccoon", "Subject 89P13"]
+type: "character"
+biography: "Rocket is a cybernetically enhanced Guardian of the Galaxy with deep trauma from experiments by the High Evolutionary. He becomes one of the team's most capable engineers and tacticians."
+powers:
+  - "Weapons engineering"
+  - "Tactical intelligence"
+  - "Enhanced reflexes"
+weaknesses:
+  - "Trauma from experimentation"
+  - "Defensive emotional walls"
+weapons:
+  - "Heavy firearms"
+  - "Explosives"
+affiliations:
+  - "Guardians of the Galaxy"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 10
+chronological_year: 2026

@@ -1,0 +1,22 @@
+id: "shuri"
+name: "Shuri"
+aliases: ["Black Panther", "Princess Shuri"]
+type: "character"
+biography: "Shuri is Wakanda's princess, a brilliant scientist, and T'Challa's sister. She designed advanced vibranium technology, helped defend Vision in Avengers: Infinity War, and later became the Black Panther during Wakanda's conflict with Talokan."
+powers:
+  - "Genius-level engineering"
+  - "Vibranium technology design"
+  - "Black Panther enhancement"
+weaknesses:
+  - "Grief over family losses"
+  - "Pressure to lead Wakanda"
+weapons:
+  - "Vibranium gauntlets"
+  - "Black Panther suit"
+affiliations:
+  - "Wakanda"
+  - "Dora Milaje"
+status: "Alive"
+spoiler_level: "full"
+release_order_index: 18
+chronological_year: 2025
