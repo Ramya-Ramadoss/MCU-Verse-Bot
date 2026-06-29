@@ -1,4 +1,4 @@
-# MCUVerse AI
+# MCUVerse AI ChatBot
 
 Enterprise-grade AI knowledge assistant for the Marvel Cinematic Universe. Built with a domain-agnostic retrieval engine and a swappable MCU knowledge layer.
 
@@ -6,20 +6,6 @@ Enterprise-grade AI knowledge assistant for the Marvel Cinematic Universe. Built
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green)
 ![React](https://img.shields.io/badge/React-18-61DAFB)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-
-## Features
-
-- **Hybrid Retrieval** — FAISS vector search + SQLite FTS5 keyword search + knowledge graph
-- **Graph Reasoning** — Entity relationship lookups for mentors, allies, wielders, appearances, locations, and team membership
-- **Knowledge Intelligence** — Intent detection, query expansion, reranking, and explainable context assembly
-- **Expanded MCU + Comics Base** — 80 local knowledge documents across MCU films, Disney+ series, teams, artifacts, X-Men/Deadpool context, and comic-origin notes
-- **Spoiler Protection** — Spoiler-free, partial, or full knowledge modes
-- **JWT Auth + Guest Mode** — Register, login, guest sessions, and user-scoped chat history
-- **Admin Control Center** — Analytics, document inspection, knowledge ingestion, and FAISS reindexing
-- **LLM Abstraction** — Gemini, OpenAI, Ollama, or retrieval-only (no API key required)
-- **Optional Cache** — Memory (dev), SQLite, or Redis (production)
-- **Premium UI** — J.A.R.V.I.S.-inspired glassmorphism chat interface
-- **Analytics** — Retrieval latency, confidence, embedding counts
 
 ## Quick Start
 
@@ -45,6 +31,24 @@ npm run dev
 ```
 
 Open http://localhost:5173
+
+---
+
+## Features
+
+- **Hybrid Retrieval** — FAISS vector search + SQLite FTS5 keyword search + knowledge graph
+- **Graph Reasoning** — Entity relationship lookups for mentors, allies, wielders, appearances, locations, and team membership
+- **Knowledge Intelligence** — Intent detection, query expansion, reranking, and explainable context assembly
+- **Expanded MCU + Comics Base** — 80 local knowledge documents across MCU films, Disney+ series, teams, artifacts, X-Men/Deadpool context, and comic-origin notes
+- **Spoiler Protection** — Spoiler-free, partial, or full knowledge modes
+- **JWT Auth + Guest Mode** — Register, login, guest sessions, and user-scoped chat history
+- **Admin Control Center** — Analytics, document inspection, knowledge ingestion, and FAISS reindexing
+- **LLM Abstraction** — Gemini, OpenAI, Ollama, or retrieval-only (no API key required)
+- **Optional Cache** — Memory (dev), SQLite, or Redis (production)
+- **Premium UI** — J.A.R.V.I.S.-inspired glassmorphism chat interface
+- **Analytics** — Retrieval latency, confidence, embedding counts
+
+
 
 ### Docker
 
