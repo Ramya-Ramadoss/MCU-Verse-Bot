@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:8A2BE2,100:FF1493&text=MCU Verse%20AI ChatBot&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=40" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=250&color=0:8A2BE2,100:FF1493&text=MCUVerse%20AI%20ChatBot&fontSize=55&fontColor=ffffff&animation=fadeIn&fontAlignY=40" />
 </p>
 
 ---
