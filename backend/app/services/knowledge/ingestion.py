@@ -4,6 +4,15 @@ import json
 from sqlalchemy.orm import Session
 from backend.app.db.models.document import Document
 from backend.app.db.models.graph import Entity, Relationship
+from backend.app.services.knowledge.schema import (
+    RelationshipSpec,
+    canonical_description,
+    canonical_metadata,
+    canonical_title,
+    extract_relationship_specs,
+    normalize_knowledge_type,
+    relationship_specs_from_root,
+)
 
 def construct_character_content(data: dict) -> str:
     aliases = ", ".join(data.get("aliases", []))
@@ -42,14 +51,14 @@ Post-Credit Scene: {data.get('post_credit_scene')}
 """
 
 def construct_generic_content(data: dict) -> str:
-    title = data.get("title", data.get("name", data.get("id", "Untitled")))
+    title = canonical_title(data)
     summary = data.get("summary", data.get("description", data.get("content", "")))
     details = []
     for key, value in data.items():
-        if key in {"id", "title", "name", "type", "summary", "description", "content"}:
+        if key in {"id", "title", "name", "type", "summary", "description", "content", "relationships"}:
             continue
         if isinstance(value, list):
-            details.append(f"{key.replace('_', ' ').title()}: {', '.join(str(item) for item in value)}")
+            details.append(f"{key.replace('_', ' ').title()}: {_format_list_value(value)}")
         elif isinstance(value, dict):
             details.append(f"{key.replace('_', ' ').title()}: {json.dumps(value)}")
         else:
@@ -61,6 +70,65 @@ Type: {data.get('type', 'knowledge')}
 Summary: {summary}
 {detail_text}
 """
+
+
+def _format_list_value(value: list) -> str:
+    rendered = []
+    for item in value:
+        if isinstance(item, dict):
+            rendered.append(json.dumps(item))
+        else:
+            rendered.append(str(item))
+    return ", ".join(rendered)
+
+
+def _upsert_stub_entity(
+    db: Session,
+    entity_id: str,
+    relation_type: str = "",
+    known_entity_ids: set[str] | None = None,
+) -> bool:
+    if known_entity_ids is not None and entity_id in known_entity_ids:
+        return False
+
+    existing = db.query(Entity).filter(Entity.id == entity_id).first()
+    if existing:
+        if known_entity_ids is not None:
+            known_entity_ids.add(entity_id)
+        return False
+
+    inferred_type = "team" if "team" in entity_id or relation_type in {"member_of", "has_member"} else "unknown"
+    db.add(
+        Entity(
+            id=entity_id,
+            name=entity_id.replace("_", " ").title(),
+            type=inferred_type,
+            description="Stub entity created during relationship ingestion.",
+        )
+    )
+    if known_entity_ids is not None:
+        known_entity_ids.add(entity_id)
+    return True
+
+
+def _insert_relationships(db: Session, relationship_specs: list[RelationshipSpec]) -> int:
+    db.query(Relationship).delete()
+    known_entity_ids = {entity_id for (entity_id,) in db.query(Entity.id).all()}
+    inserted = 0
+    for spec in relationship_specs:
+        _upsert_stub_entity(db, spec.source_id, spec.relation_type, known_entity_ids)
+        _upsert_stub_entity(db, spec.target_id, spec.relation_type, known_entity_ids)
+        db.add(
+            Relationship(
+                source_entity_id=spec.source_id,
+                target_entity_id=spec.target_id,
+                relation_type=spec.relation_type,
+                description=spec.description,
+            )
+        )
+        inserted += 1
+    return inserted
+
 
 def ingest_all_knowledge(db: Session, knowledge_dir: str):
     """
@@ -76,12 +144,11 @@ def ingest_all_knowledge(db: Session, knowledge_dir: str):
         "relationships": 0
     }
 
-    # Step 1: Process character profiles and movie profiles
+    relationship_specs: list[RelationshipSpec] = []
+
+    # Step 1: Process modular knowledge profiles
     for root, _, files in os.walk(knowledge_dir):
         category = os.path.basename(root)
-        if category in ["relationships", "knowledge"]:
-            # Skip relationships for the second pass
-            continue
             
         for file in files:
             if not (file.endswith(".yaml") or file.endswith(".yml")):
@@ -96,10 +163,12 @@ def ingest_all_knowledge(db: Session, knowledge_dir: str):
                     continue
             
             if not data or "id" not in data:
+                if category == "relationships" and data:
+                    relationship_specs.extend(relationship_specs_from_root(data))
                 continue
 
             entity_id = data["id"]
-            entity_type = data.get("type", "unknown")
+            entity_type = normalize_knowledge_type(data.get("type"), category)
             
             # Determine content and metadata based on type
             content = ""
@@ -110,32 +179,21 @@ def ingest_all_knowledge(db: Session, knowledge_dir: str):
                 content = construct_character_content(data)
                 name = data.get("name", entity_id)
                 metadata = {
-                    "spoiler_level": data.get("spoiler_level", "none"),
+                    **canonical_metadata(data, category),
                     "aliases": data.get("aliases", []),
                     "status": data.get("status", "unknown"),
-                    "release_order_index": data.get("release_order_index", 0),
-                    "chronological_year": data.get("chronological_year")
                 }
             elif entity_type == "movie":
                 content = construct_movie_content(data)
                 name = data.get("title", entity_id)
                 metadata = {
-                    "spoiler_level": data.get("spoiler_level", "none"),
+                    **canonical_metadata(data, category),
                     "phase": data.get("phase"),
-                    "release_date": data.get("release_date"),
-                    "timeline_position": data.get("timeline_position", {})
                 }
             else:
-                name = data.get("title", data.get("name", entity_id))
+                name = canonical_title(data)
                 content = construct_generic_content(data)
-                metadata = {
-                    **data.get("metadata", {}),
-                    "spoiler_level": data.get("spoiler_level", "none"),
-                    "release_date": data.get("release_date"),
-                    "timeline_position": data.get("timeline_position", {}),
-                    "release_order_index": data.get("release_order_index", 0),
-                    "chronological_year": data.get("chronological_year"),
-                }
+                metadata = canonical_metadata(data, category)
             
             # 1. Upsert into Document
             doc = db.query(Document).filter(Document.file_path == file_path).first()
@@ -157,68 +215,20 @@ def ingest_all_knowledge(db: Session, knowledge_dir: str):
             entity.name = name
             entity.type = entity_type
             entity.aliases_json = data.get("aliases", [])
-            entity.description = data.get(
-                "biography",
-                data.get("synopsis", data.get("summary", data.get("description", ""))),
-            )
+            entity.description = canonical_description(data)
+            relationship_specs.extend(extract_relationship_specs(data))
             
             stats["documents"] += 1
             stats["entities"] += 1
 
     db.commit()
 
-    # Step 2: Process relationships.yaml
-    rel_path = os.path.join(knowledge_dir, "relationships", "relationships.yaml")
-    if os.path.exists(rel_path):
-        with open(rel_path, "r", encoding="utf-8") as f:
-            try:
-                rel_data = yaml.safe_load(f)
-            except Exception as e:
-                print(f"Error parsing relationships YAML: {e}")
-                rel_data = {}
-                
-        if rel_data and "relationships" in rel_data:
-            # Delete old relationships to avoid duplicates/stale links
-            db.query(Relationship).delete()
-            
-            pending_stub_ids = set()
-            for item in rel_data["relationships"]:
-                source_id = item.get("source_id")
-                target_id = item.get("target_id")
-                rel_type = item.get("relation_type")
-                desc = item.get("description")
-                
-                if not source_id or not target_id or not rel_type:
-                    continue
-                
-                # Check that source and target exist as entities. If not, create stub entities
-                for ent_id in [source_id, target_id]:
-                    if ent_id in pending_stub_ids:
-                        continue
-                    ent = db.query(Entity).filter(Entity.id == ent_id).first()
-                    if not ent:
-                        # Stub entity placeholder
-                        ent = Entity(
-                            id=ent_id,
-                            name=ent_id.replace("_", " ").title(),
-                            type="character" if "team" not in ent_id else "team",
-                            description="Stub entity created during relationship ingestion."
-                        )
-                        db.add(ent)
-                        pending_stub_ids.add(ent_id)
-                        stats["entities"] += 1
-                
-                # Add relationship
-                relationship_obj = Relationship(
-                    source_entity_id=source_id,
-                    target_entity_id=target_id,
-                    relation_type=rel_type,
-                    description=desc
-                )
-                db.add(relationship_obj)
-                stats["relationships"] += 1
-                
-            db.commit()
+    # Step 2: Materialize all explicit and derived graph edges in one pass.
+    if relationship_specs:
+        before_entities = db.query(Entity).count()
+        stats["relationships"] = _insert_relationships(db, relationship_specs)
+        db.commit()
+        stats["entities"] += max(db.query(Entity).count() - before_entities, 0)
             
     print(f"Ingestion completed. Stats: {stats}")
     return stats

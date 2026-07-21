@@ -90,6 +90,81 @@ def test_knowledge_ingestion_and_search(db_session):
     assert kg_results[0]["target"] == "Peter Parker"
     assert kg_results[0]["relation"] == "mentored"
 
+    timeline = db_session.query(Document).filter(
+        Document.title == "MCU Chronological Timeline (Selected)"
+    ).first()
+    assert timeline is not None
+    assert timeline.metadata_json["spoiler_level"] == "partial"
+
+
+def test_modular_knowledge_schema_supports_variants_events_and_embedded_relationships(db_session, tmp_path):
+    knowledge_root = tmp_path / "knowledge"
+    variants_dir = knowledge_root / "variants"
+    events_dir = knowledge_root / "comic_events"
+    variants_dir.mkdir(parents=True)
+    events_dir.mkdir(parents=True)
+
+    (variants_dir / "sylvie.yaml").write_text(
+        """
+id: "sylvie_laufeydottir"
+name: "Sylvie Laufeydottir"
+type: "variant"
+continuity: "mcu"
+canon_status: "canon"
+universe: "branched_timeline"
+summary: "A Loki variant connected to TVA branch timeline stories."
+variant_of: "loki_laufeyson"
+relationships:
+  - target_id: "tva"
+    relation_type: "enemy_of"
+    description: "Sylvie was hunted by the TVA."
+""".strip(),
+        encoding="utf-8",
+    )
+
+    (events_dir / "secret_wars_2015.yaml").write_text(
+        """
+id: "secret_wars_2015"
+title: "Secret Wars (2015)"
+type: "comic_event"
+continuity: "comics"
+canon_status: "mainline_comics"
+summary: "A major Marvel Comics event useful for comics-continuity answers."
+metadata:
+  spoiler_level: "partial"
+relationships:
+  - target_id: "doctor_doom"
+    relation_type: "features"
+    description: "Doctor Doom is central to the event context in this local entry."
+""".strip(),
+        encoding="utf-8",
+    )
+
+    stats = ingest_all_knowledge(db_session, str(knowledge_root))
+
+    assert stats["documents"] == 2
+    assert stats["relationships"] == 3
+
+    sylvie = db_session.query(Entity).filter(Entity.id == "sylvie_laufeydottir").first()
+    assert sylvie is not None
+    assert sylvie.type == "variant"
+
+    secret_wars = db_session.query(Document).filter(Document.title == "Secret Wars (2015)").first()
+    assert secret_wars is not None
+    assert secret_wars.metadata_json["knowledge_type"] == "comic_event"
+    assert secret_wars.metadata_json["continuity"] == "comics"
+    assert secret_wars.metadata_json["spoiler_level"] == "partial"
+
+    variant_edge = db_session.query(Relationship).filter(
+        Relationship.source_entity_id == "sylvie_laufeydottir",
+        Relationship.target_entity_id == "loki_laufeyson",
+        Relationship.relation_type == "variant_of",
+    ).first()
+    assert variant_edge is not None
+
+    doom_stub = db_session.query(Entity).filter(Entity.id == "doctor_doom").first()
+    assert doom_stub is not None
+
 def test_faiss_and_hybrid_search(db_session):
     from backend.app.retrieval.embeddings.faiss_manager import get_faiss_manager
     from backend.app.retrieval.searcher import hybrid_search_documents
@@ -115,4 +190,3 @@ def test_faiss_and_hybrid_search(db_session):
     doc, score = results[0]
     assert score > 0.0
     assert doc.title is not None
-
