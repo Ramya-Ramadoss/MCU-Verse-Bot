@@ -96,3 +96,20 @@ async def test_character_question_returns_focused_answer():
         assert citations
         assert any(citation.get("source_type") for citation in citations)
         assert any(citation.get("reason") for citation in citations)
+
+
+@pytest.mark.asyncio
+async def test_entity_graph_and_timeline_endpoints():
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        graph = await client.get("/api/v1/knowledge/entities/tony_stark/graph")
+        assert graph.status_code == 200
+        graph_data = graph.json()
+        assert graph_data["center"]["id"] == "tony_stark"
+        assert any(edge["target_entity_id"] == "peter_parker" for edge in graph_data["edges"])
+
+        timeline = await client.get("/api/v1/knowledge/timeline?category=movies")
+        assert timeline.status_code == 200
+        timeline_data = timeline.json()
+        assert timeline_data
+        assert any(entry["title"] == "Avengers: Endgame" for entry in timeline_data)

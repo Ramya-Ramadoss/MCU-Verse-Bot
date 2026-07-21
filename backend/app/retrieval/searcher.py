@@ -261,7 +261,7 @@ def search_documents_fts(query: str, settings: Any, db: Session) -> List[Documen
     fts_sql = text("""
         SELECT document_id FROM documents_fts 
         WHERE documents_fts MATCH :query 
-        LIMIT 10
+        LIMIT 25
     """)
     
     try:
@@ -272,12 +272,17 @@ def search_documents_fts(query: str, settings: Any, db: Session) -> List[Documen
     except Exception as e:
         print(f"FTS5 Query failed, falling back to LIKE: {e}")
         
-    # Fallback to standard LIKE matching if no results or FTS errored
-    if not results:
-        like_query = f"%{clean_query}%"
-        results = db.query(Document).filter(
-            (Document.title.ilike(like_query)) | (Document.content.ilike(like_query))
-        ).limit(5).all()
+    # Always merge in a LIKE pass. FTS ranking/order can vary across SQLite
+    # versions, while LIKE reliably catches exact title/name mentions.
+    like_query = f"%{clean_query}%"
+    like_results = db.query(Document).filter(
+        (Document.title.ilike(like_query)) | (Document.content.ilike(like_query))
+    ).limit(10).all()
+
+    merged_results: Dict[str, Document] = {doc.id: doc for doc in results}
+    for doc in like_results:
+        merged_results[doc.id] = doc
+    results = list(merged_results.values())
 
     # Apply spoiler filtering
     filtered_results = []

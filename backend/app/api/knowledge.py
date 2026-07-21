@@ -9,9 +9,13 @@ from backend.app.db.models.document import Document
 from backend.app.db.models.graph import Entity, Relationship
 from backend.app.models.knowledge import (
     DocumentResponse,
+    EntityGraphResponse,
     EntityResponse,
+    GraphEdgeResponse,
+    GraphNodeResponse,
     RelationshipResponse,
     IngestionStatsResponse,
+    TimelineEntryResponse,
 )
 from backend.app.retrieval.embeddings.faiss_manager import get_faiss_manager
 from backend.app.services.knowledge.ingestion import ingest_all_knowledge
@@ -69,6 +73,118 @@ def list_entities(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     return db.query(Entity).offset(skip).limit(limit).all()
 
 
+@router.get("/entities/{entity_id}/graph", response_model=EntityGraphResponse)
+def get_entity_graph(entity_id: str, depth: int = 1, limit: int = 40, db: Session = Depends(get_db)):
+    center = db.query(Entity).filter(Entity.id == entity_id).first()
+    if not center:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Entity not found.")
+
+    depth = max(1, min(depth, 2))
+    limit = max(1, min(limit, 100))
+    nodes = {center.id: center}
+    edges: list[GraphEdgeResponse] = []
+    frontier = {center.id}
+    visited = set()
+
+    for _ in range(depth):
+        if len(edges) >= limit:
+            break
+        visited.update(frontier)
+        rels = (
+            db.query(Relationship)
+            .filter(
+                (Relationship.source_entity_id.in_(frontier))
+                | (Relationship.target_entity_id.in_(frontier))
+            )
+            .limit(limit - len(edges))
+            .all()
+        )
+        next_frontier = set()
+        for rel in rels:
+            nodes[rel.source_entity_id] = rel.source_entity
+            nodes[rel.target_entity_id] = rel.target_entity
+            if rel.source_entity_id in frontier:
+                direction = "outgoing"
+                next_frontier.add(rel.target_entity_id)
+            else:
+                direction = "incoming"
+                next_frontier.add(rel.source_entity_id)
+            edges.append(
+                GraphEdgeResponse(
+                    id=rel.id,
+                    source_entity_id=rel.source_entity_id,
+                    source_name=rel.source_entity.name,
+                    target_entity_id=rel.target_entity_id,
+                    target_name=rel.target_entity.name,
+                    relation_type=rel.relation_type,
+                    description=rel.description,
+                    direction=direction,
+                )
+            )
+        frontier = next_frontier - visited
+        if not frontier:
+            break
+
+    return EntityGraphResponse(
+        center=GraphNodeResponse(id=center.id, name=center.name, type=center.type),
+        nodes=[
+            GraphNodeResponse(id=node.id, name=node.name, type=node.type)
+            for node in sorted(nodes.values(), key=lambda item: item.name)
+        ],
+        edges=edges,
+    )
+
+
 @router.get("/relationships", response_model=List[RelationshipResponse])
 def list_relationships(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return db.query(Relationship).offset(skip).limit(limit).all()
+
+
+@router.get("/timeline", response_model=List[TimelineEntryResponse])
+def list_timeline(
+    continuity: str | None = None,
+    category: str | None = None,
+    limit: int = 100,
+    db: Session = Depends(get_db),
+):
+    docs = db.query(Document).all()
+    entries = []
+    for doc in docs:
+        metadata = doc.metadata_json or {}
+        if continuity and str(metadata.get("continuity", "")).lower() != continuity.lower():
+            continue
+        if category and doc.category != category:
+            continue
+
+        timeline_position = metadata.get("timeline_position") or {}
+        release_order = timeline_position.get("release_order")
+        chronological_order = timeline_position.get("chronological_order")
+        release_date = metadata.get("release_date")
+        chronological_year = metadata.get("chronological_year")
+        if not any([release_date, chronological_year, release_order, chronological_order]):
+            continue
+
+        entries.append(
+            TimelineEntryResponse(
+                id=doc.id,
+                title=doc.title,
+                category=doc.category,
+                knowledge_type=metadata.get("knowledge_type"),
+                continuity=metadata.get("continuity"),
+                release_date=release_date,
+                chronological_year=chronological_year,
+                release_order=release_order,
+                chronological_order=chronological_order,
+                spoiler_level=metadata.get("spoiler_level"),
+            )
+        )
+
+    entries.sort(
+        key=lambda entry: (
+            entry.chronological_order if entry.chronological_order is not None else 9999,
+            entry.release_order if entry.release_order is not None else 9999,
+            entry.release_date or "",
+            entry.title,
+        )
+    )
+    return entries[: max(1, min(limit, 250))]
