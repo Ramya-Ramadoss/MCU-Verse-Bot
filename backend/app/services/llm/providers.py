@@ -5,16 +5,19 @@ from openai import OpenAI
 import google.generativeai as genai
 from backend.app.core.config import settings
 from backend.app.services.llm.base import BaseLLMProvider, LLMResponse
+from backend.app.services.llm.prompt_contract import ANSWER_QUALITY_CONTRACT
 
-# System instructions to style the response cinematically like J.A.R.V.I.S.
-SYSTEM_PROMPT = """You are J.A.R.V.I.S. (Just A Rather Very Intelligent System), Tony Stark's advanced AI interface.
-Your directive is to answer natural language questions about the Marvel Cinematic Universe (MCU) based ONLY on the provided context chunks.
+# System instructions to style the response cinematically while enforcing grounded answers.
+SYSTEM_PROMPT = f"""You are J.A.R.V.I.S. (Just A Rather Very Intelligent System), Tony Stark's advanced AI interface.
+Your directive is to answer natural language questions about Marvel based ONLY on the provided context chunks.
 
 Guidelines:
 1. Speak in a sophisticated, helpful, and slightly cinematic tone, addressing the user with courtesy (e.g. 'Sir' or 'Ma'am' when appropriate).
-2. If the context does not contain the answer, politely state: 'I am afraid my databases do not contain that information, Sir.'
+2. If the context does not contain the answer, politely state that the local databases do not contain enough evidence.
 3. Do not invent details outside of the provided context.
 4. Reference the movies, series, or graph relationships that you used to construct the answer in a professional citation style.
+5. Follow this answer contract:
+{ANSWER_QUALITY_CONTRACT}
 """
 
 def prepare_context_text(context_chunks: Union[List[str], str]) -> str:
@@ -55,25 +58,16 @@ class RetrievalOnlyProvider(BaseLLMProvider):
 
     def _compose_retrieval_answer(self, prompt: str, context: str) -> str:
         question = prompt.strip().lower()
+        sources = self._extract_sources(context)
         facts = self._extract_facts(context)
 
         if "compare" in question or "difference" in question or " vs " in f" {question} ":
-            return self._compose_comparison(prompt, facts)
+            return self._compose_comparison(prompt, facts, sources)
 
-        if question.startswith(("who", "what", "tell", "explain", "show", "list")):
-            selected = facts[:7]
-            if not selected:
-                return "I found related MCU entries, but not enough clean evidence to answer precisely."
-            lines = ["Here is the most relevant answer from the MCU knowledge base:"]
-            for fact in selected:
-                lines.append(f"- {fact}")
-            lines.append("\nSources are shown below as citations.")
-            return "\n".join(lines)
-
-        selected = facts[:5]
-        if not selected:
+        if not facts:
             return "I found related MCU entries, but not enough clean evidence to answer precisely."
-        return "Based on the MCU knowledge base:\n" + "\n".join(f"- {fact}" for fact in selected)
+
+        return self._compose_structured_answer(facts, sources)
 
     def _extract_facts(self, context: str) -> List[str]:
         facts: List[str] = []
@@ -92,9 +86,6 @@ class RetrievalOnlyProvider(BaseLLMProvider):
             if lower.startswith(skip_prefixes):
                 continue
             if lower.startswith("[") and "]" in line:
-                title = line.split("]", 1)[0].strip("[")
-                if title and title not in facts:
-                    facts.append(f"Source: {title}.")
                 continue
             line = re.sub(r"\s+", " ", line)
             line = line.replace("_", " ")
@@ -104,7 +95,76 @@ class RetrievalOnlyProvider(BaseLLMProvider):
                 facts.append(line)
         return facts
 
-    def _compose_comparison(self, prompt: str, facts: List[str]) -> str:
+    def _extract_sources(self, context: str) -> List[Dict[str, str]]:
+        sources: List[Dict[str, str]] = []
+        for raw_line in context.splitlines():
+            line = raw_line.strip()
+            if not line.startswith("[") or "]" not in line:
+                continue
+            title = line.split("]", 1)[0].strip("[")
+            detail = line.split("]", 1)[1].strip()
+            category = "knowledge"
+            source_type = "retrieval"
+            score = ""
+            match = re.search(r"\(([^,]+),\s*([^,]+),\s*score=([0-9.]+)\)", detail)
+            if match:
+                category = match.group(1).strip()
+                source_type = match.group(2).strip()
+                score = match.group(3).strip()
+            source = {
+                "title": title,
+                "category": category,
+                "source_type": source_type,
+                "score": score,
+            }
+            if source not in sources:
+                sources.append(source)
+        return sources
+
+    def _compose_structured_answer(self, facts: List[str], sources: List[Dict[str, str]]) -> str:
+        selected = facts[:8]
+        continuity = self._detect_continuity(sources, selected)
+        confidence = self._confidence_label(sources)
+        spoiler_warning = self._spoiler_warning(selected)
+
+        lines = []
+        if spoiler_warning:
+            lines.append(spoiler_warning)
+            lines.append("")
+
+        lines.append("**Direct Answer**")
+        lines.append(selected[0])
+
+        lines.append("\n**Details**")
+        lines.extend(f"- {fact}" for fact in selected[1:5])
+
+        lines.append("\n**Continuity**")
+        lines.append(f"- {continuity}")
+
+        timeline_facts = [
+            fact for fact in selected
+            if any(token in fact.lower() for token in ["phase", "release date", "chronological", "timeline", "year"])
+        ][:3]
+        if timeline_facts:
+            lines.append("\n**Timeline Placement**")
+            lines.extend(f"- {fact}" for fact in timeline_facts)
+
+        related_facts = [
+            fact for fact in selected
+            if any(token in fact.lower() for token in ["affiliations", "characters introduced", "major events", "knowledge graph edge"])
+        ][:3]
+        if related_facts:
+            lines.append("\n**Related Entities**")
+            lines.extend(f"- {fact}" for fact in related_facts)
+
+        lines.append("\n**Sources Used**")
+        lines.extend(self._format_sources(sources))
+
+        lines.append("\n**Confidence**")
+        lines.append(f"- {confidence}")
+        return "\n".join(lines)
+
+    def _compose_comparison(self, prompt: str, facts: List[str], sources: List[Dict[str, str]]) -> str:
         prompt_lower = prompt.lower()
         left_label = "First subject"
         right_label = "Second subject"
@@ -136,8 +196,57 @@ class RetrievalOnlyProvider(BaseLLMProvider):
         if shared:
             lines.append("\n**Key connection**")
             lines.extend(f"- {fact}" for fact in shared)
-        lines.append("\nIn short: T'Challa represents Wakanda's responsibility to protect and evolve, while Killmonger forces Wakanda to confront the pain caused by isolation and inherited injustice.")
+        lines.append("\n**Continuity**")
+        lines.append(f"- {self._detect_continuity(sources, facts)}")
+        lines.append("\n**Sources Used**")
+        lines.extend(self._format_sources(sources))
+        lines.append("\n**Confidence**")
+        lines.append(f"- {self._confidence_label(sources)}")
         return "\n".join(lines)
+
+    def _detect_continuity(self, sources: List[Dict[str, str]], facts: List[str]) -> str:
+        categories = {source["category"] for source in sources}
+        joined_facts = " ".join(facts).lower()
+        if "comics" in categories and ("movies" in categories or "series" in categories or "characters" in categories):
+            return "Mixed MCU and Marvel Comics context. Treat comic details as source-continuity context, not automatic MCU canon."
+        if "comics" in categories:
+            return "Marvel Comics context, unless a source explicitly says it is MCU continuity."
+        if any(category in categories for category in ["movies", "series", "characters", "artifacts", "events"]):
+            return "MCU-focused context from the local knowledge base."
+        if "graph" in categories or "knowledge graph edge" in joined_facts:
+            return "Knowledge graph relationship evidence from the local Marvel graph."
+        return "Continuity is not fully specified by the retrieved context."
+
+    def _confidence_label(self, sources: List[Dict[str, str]]) -> str:
+        if any(source["source_type"] == "graph" for source in sources):
+            return "High for the stated relationship because the knowledge graph returned a direct match."
+        strong_scores = [
+            float(source["score"])
+            for source in sources
+            if source["score"] and float(source["score"]) >= 0.75
+        ]
+        if len(strong_scores) >= 2:
+            return "High, supported by multiple strong retrieved sources."
+        if sources:
+            return "Medium, supported by retrieved local knowledge but with limited corroborating context."
+        return "Low, because no clear source metadata was available."
+
+    def _spoiler_warning(self, facts: List[str]) -> str:
+        joined = " ".join(facts).lower()
+        if "spoiler level: full" in joined or "spoiler_level: full" in joined:
+            return "**Spoiler Warning:** This answer uses full-spoiler knowledge-base context."
+        if "spoiler level: partial" in joined or "spoiler_level: partial" in joined:
+            return "**Spoiler Warning:** This answer uses partial-spoiler knowledge-base context."
+        return ""
+
+    def _format_sources(self, sources: List[Dict[str, str]]) -> List[str]:
+        if not sources:
+            return ["- No source titles were available in the retrieved context."]
+        return [
+            f"- {source['title']} ({source['category']}, {source['source_type']}"
+            f"{', score=' + source['score'] if source['score'] else ''})"
+            for source in sources[:5]
+        ]
 
 class GeminiProvider(BaseLLMProvider):
     def __init__(self):
