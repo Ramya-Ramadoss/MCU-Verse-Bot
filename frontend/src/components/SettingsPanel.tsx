@@ -67,6 +67,68 @@ export function SettingsPanel({ settings, onChange, open, onClose }: SettingsPan
               }
             />
           </label>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="block text-sm">
+              <span className="mb-1 block text-slate-400">Continuity</span>
+              <select
+                className="glass-input w-full"
+                value={settings.continuity_filter || ""}
+                onChange={(e) =>
+                  onChange({ ...settings, continuity_filter: e.target.value || null })
+                }
+              >
+                <option value="">Any</option>
+                <option value="mcu">MCU</option>
+                <option value="comics">Comics</option>
+                <option value="animated">Animated</option>
+              </select>
+            </label>
+
+            <label className="block text-sm">
+              <span className="mb-1 block text-slate-400">Knowledge Type</span>
+              <select
+                className="glass-input w-full"
+                value={settings.knowledge_type_filter || ""}
+                onChange={(e) =>
+                  onChange({ ...settings, knowledge_type_filter: e.target.value || null })
+                }
+              >
+                <option value="">Any</option>
+                <option value="character">Character</option>
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+                <option value="comic_event">Comic Event</option>
+                <option value="variant">Variant</option>
+                <option value="artifact">Artifact</option>
+                <option value="timeline">Timeline</option>
+              </select>
+            </label>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="block text-sm">
+              <span className="mb-1 block text-slate-400">Canon Status</span>
+              <input
+                className="glass-input w-full"
+                placeholder="official_confirmation"
+                value={settings.canon_status_filter || ""}
+                onChange={(e) =>
+                  onChange({ ...settings, canon_status_filter: e.target.value || null })
+                }
+              />
+            </label>
+
+            <label className="block text-sm">
+              <span className="mb-1 block text-slate-400">Earth</span>
+              <input
+                className="glass-input w-full"
+                placeholder="earth_616"
+                value={settings.earth_filter || ""}
+                onChange={(e) => onChange({ ...settings, earth_filter: e.target.value || null })}
+              />
+            </label>
+          </div>
         </div>
 
         <div className="mt-6 flex justify-end">

@@ -92,3 +92,7 @@ async def test_character_question_returns_focused_answer():
         assert "Killmonger" in content
         assert "Source Chunk" not in content
         assert "retrieved from the database" not in content
+        citations = resp.json()["citations"]
+        assert citations
+        assert any(citation.get("source_type") for citation in citations)
+        assert any(citation.get("reason") for citation in citations)

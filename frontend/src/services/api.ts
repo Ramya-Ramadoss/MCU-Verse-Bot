@@ -26,6 +26,11 @@ export interface ChatSettings {
   spoiler_preference: string;
   watched_up_to_movie: string | null;
   watched_up_to_series: string | null;
+  continuity_filter: string | null;
+  canon_status_filter: string | null;
+  universe_filter: string | null;
+  earth_filter: string | null;
+  knowledge_type_filter: string | null;
   language: string;
 }
 
@@ -34,6 +39,14 @@ export interface Citation {
   score: number | null;
   category: string | null;
   title: string | null;
+  source_type: string | null;
+  reason: string | null;
+  continuity: string | null;
+  canon_status: string | null;
+  universe: string | null;
+  earth: string | null;
+  knowledge_type: string | null;
+  linked_entities: string[] | null;
 }
 
 export interface Message {
@@ -110,6 +123,11 @@ export const defaultSettings: ChatSettings = {
   spoiler_preference: "full",
   watched_up_to_movie: null,
   watched_up_to_series: null,
+  continuity_filter: null,
+  canon_status_filter: null,
+  universe_filter: null,
+  earth_filter: null,
+  knowledge_type_filter: null,
   language: "en",
 };
 

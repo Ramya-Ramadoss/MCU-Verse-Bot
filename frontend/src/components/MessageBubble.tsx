@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
-import { Bot, Copy, FileSearch, User } from "lucide-react";
-import type { ChatMessage } from "@/services/api";
+import { Bot, Copy, FileSearch, Info, Network, Tag, User } from "lucide-react";
+import type { ChatMessage, Citation } from "@/services/api";
 import { cn } from "@/lib/utils";
 
 interface MessageBubbleProps {
@@ -68,22 +69,61 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         )}
 
         {!isUser && message.citations && message.citations.length > 0 && (
-          <div className="flex flex-wrap gap-2 px-1">
+          <div className="space-y-2 px-1">
             {message.citations.map((c, i) => (
-              <span
+              <div
                 key={`${c.source}-${i}`}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/15 bg-slate-900/50 px-2 py-1 text-xs text-slate-300"
+                className="rounded-lg border border-cyan-500/15 bg-slate-900/50 px-2.5 py-2 text-xs text-slate-300"
               >
-                <FileSearch size={12} className="text-cyan-400" />
-                {c.title || c.source}
-                {c.score != null && (
-                  <span className="ml-1 text-cyan-400">({c.score.toFixed(2)})</span>
-                )}
-              </span>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <FileSearch size={12} className="text-cyan-400" />
+                  <span className="font-medium text-slate-200">{c.title || c.source}</span>
+                  {c.score != null && <EvidencePill>{c.score.toFixed(2)}</EvidencePill>}
+                  {c.source_type && <EvidencePill icon={<Network size={11} />}>{c.source_type}</EvidencePill>}
+                  {c.category && <EvidencePill icon={<Tag size={11} />}>{c.category}</EvidencePill>}
+                  {c.continuity && <EvidencePill>{c.continuity}</EvidencePill>}
+                  {c.canon_status && <EvidencePill>{c.canon_status}</EvidencePill>}
+                  {c.knowledge_type && <EvidencePill>{c.knowledge_type}</EvidencePill>}
+                  {c.earth && <EvidencePill>{c.earth}</EvidencePill>}
+                  {c.universe && <EvidencePill>{c.universe}</EvidencePill>}
+                </div>
+                <CitationDetails citation={c} />
+              </div>
             ))}
           </div>
         )}
       </div>
     </motion.div>
+  );
+}
+
+function EvidencePill({ children, icon }: { children: ReactNode; icon?: ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-1 rounded-full bg-cyan-500/10 px-2 py-0.5 text-[11px] text-cyan-300">
+      {icon}
+      {children}
+    </span>
+  );
+}
+
+function CitationDetails({ citation }: { citation: Citation }) {
+  const linkedEntities = citation.linked_entities?.filter(Boolean) || [];
+  if (!citation.reason && linkedEntities.length === 0) return null;
+
+  return (
+    <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
+      {citation.reason && (
+        <span className="inline-flex items-center gap-1">
+          <Info size={11} className="text-cyan-400" />
+          {citation.reason}
+        </span>
+      )}
+      {linkedEntities.length > 0 && (
+        <span className="inline-flex items-center gap-1 text-jarvis-gold">
+          <Network size={11} />
+          {linkedEntities.join(", ")}
+        </span>
+      )}
+    </div>
   );
 }

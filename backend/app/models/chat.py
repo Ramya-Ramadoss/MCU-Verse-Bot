@@ -29,6 +29,14 @@ class CitationSchema(BaseModel):
     score: Optional[float] = None
     category: Optional[str] = None
     title: Optional[str] = None
+    source_type: Optional[str] = None
+    reason: Optional[str] = None
+    continuity: Optional[str] = None
+    canon_status: Optional[str] = None
+    universe: Optional[str] = None
+    earth: Optional[str] = None
+    knowledge_type: Optional[str] = None
+    linked_entities: Optional[List[str]] = None
 
 class ChatMessageResponse(BaseModel):
     id: str

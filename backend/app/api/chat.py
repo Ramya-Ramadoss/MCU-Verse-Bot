@@ -22,7 +22,7 @@ from backend.app.services.llm.providers import get_llm_provider
 
 router = APIRouter()
 
-ANSWER_CACHE_VERSION = "v4"
+ANSWER_CACHE_VERSION = "v5"
 SEARCHER = HybridSearcher()
 SMALLTALK_INPUTS = {
     "hi",
@@ -73,6 +73,54 @@ def _settings_to_schema(settings: Settings) -> ChatSettingsSchema:
     )
 
 
+def _effective_settings(settings: Settings, request_settings: ChatSettingsSchema | None) -> ChatSettingsSchema:
+    base = _settings_to_schema(settings)
+    if not request_settings:
+        return base
+
+    return ChatSettingsSchema(
+        **{
+            **base.model_dump(),
+            **request_settings.model_dump(exclude_unset=True),
+        }
+    )
+
+
+def _cache_key_for_message(content: str, settings: ChatSettingsSchema) -> str:
+    key_payload = {
+        "content": content,
+        "spoiler_preference": settings.spoiler_preference,
+        "watched_up_to_movie": settings.watched_up_to_movie,
+        "watched_up_to_series": settings.watched_up_to_series,
+        "llm_provider": settings.llm_provider,
+        "top_k": settings.top_k,
+        "continuity_filter": settings.continuity_filter,
+        "canon_status_filter": settings.canon_status_filter,
+        "universe_filter": settings.universe_filter,
+        "earth_filter": settings.earth_filter,
+        "knowledge_type_filter": settings.knowledge_type_filter,
+    }
+    return f"chat:{ANSWER_CACHE_VERSION}:{key_payload}"
+
+
+def _citation_from_result(result) -> CitationSchema:
+    metadata = result.metadata or {}
+    return CitationSchema(
+        source=metadata.get("file_path", result.document_id),
+        score=round(result.score, 3),
+        category=result.category,
+        title=result.title,
+        source_type=result.source_type,
+        reason=metadata.get("reason"),
+        continuity=metadata.get("continuity"),
+        canon_status=metadata.get("canon_status"),
+        universe=metadata.get("universe"),
+        earth=metadata.get("earth"),
+        knowledge_type=metadata.get("knowledge_type"),
+        linked_entities=metadata.get("linked_entities"),
+    )
+
+
 def _process_chat(
     db: Session,
     conversation_id: str,
@@ -110,6 +158,8 @@ def _process_chat(
         settings.top_k = str(in_settings.top_k)
         db.commit()
 
+    effective_settings = _effective_settings(settings, msg_in.settings)
+
     if _is_smalltalk(msg_in.content):
         user_msg = Message(conversation_id=conversation_id, role="user", content=msg_in.content)
         db.add(user_msg)
@@ -136,7 +186,7 @@ def _process_chat(
     import json
     
     cache_service = get_cache()
-    cache_key = f"chat:{ANSWER_CACHE_VERSION}:{msg_in.content}:{settings.spoiler_preference}:{settings.watched_up_to_movie or ''}:{settings.watched_up_to_series or ''}:{settings.llm_provider}"
+    cache_key = _cache_key_for_message(msg_in.content, effective_settings)
     cached_data = cache_service.get(cache_key)
     
     if cached_data:
@@ -175,19 +225,12 @@ def _process_chat(
     db.add(user_msg)
     db.commit()
 
-    top_k = int(settings.top_k) if settings.top_k and settings.top_k.isdigit() else 5
-    results, intent = SEARCHER.search(db, msg_in.content, settings=settings, top_k=top_k)
+    top_k = effective_settings.top_k or 5
+    results, intent = SEARCHER.search(db, msg_in.content, settings=effective_settings, top_k=top_k)
 
     citations: List[CitationSchema] = []
     for result in results:
-        citations.append(
-            CitationSchema(
-                source=result.metadata.get("file_path", result.document_id),
-                score=round(result.score, 3),
-                category=result.category,
-                title=result.title,
-            )
-        )
+        citations.append(_citation_from_result(result))
 
     has_graph_hit = any(result.source_type == "graph" for result in results)
     best_score = max((result.score for result in results), default=0.0)
@@ -201,11 +244,11 @@ def _process_chat(
         completion_tokens = 0
     else:
         context = SEARCHER.build_context(results)
-        provider = get_llm_provider(settings.llm_provider)
+        provider = get_llm_provider(effective_settings.llm_provider)
         llm_resp = provider.generate(
             msg_in.content,
             context,
-            temperature=float(settings.temperature) if settings.temperature else 0.7,
+            temperature=effective_settings.temperature,
         )
         llm_content = llm_resp.content
         llm_provider = llm_resp.provider
