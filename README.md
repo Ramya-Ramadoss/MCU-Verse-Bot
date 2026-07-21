@@ -6,7 +6,7 @@
 
 # MCUVerse AI ChatBot
 
-Enterprise-grade AI knowledge assistant for the Marvel Cinematic Universe. Built with a domain-agnostic retrieval engine and a swappable MCU knowledge layer.
+Enterprise-grade AI knowledge assistant for the Marvel Cinematic Universe and complete comics details. Built with a domain-agnostic retrieval engine and a swappable MCU knowledge layer.
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green)
