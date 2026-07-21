@@ -7,6 +7,7 @@ from backend.app.db.models.document import Document
 from backend.app.db.models.graph import Entity, Relationship
 from backend.app.retrieval.models import RetrievalResult
 from backend.app.retrieval.reranking.ranker import rerank_results
+from backend.app.services.knowledge.schema import normalize_entity_id
 
 
 RELATION_KEYWORDS = {
@@ -75,6 +76,52 @@ def expand_query(query: str) -> List[str]:
             expansions.append(expansion)
     return expansions
 
+
+def link_query_entities(query: str, db: Session) -> List[Entity]:
+    """
+    Links query text to known entities by id, display name, and aliases.
+    Longest names naturally win because all matches are returned and reranking
+    can use the complete linked set for boosts and graph traversal.
+    """
+    query_lower = query.lower()
+    normalized_query = normalize_entity_id(query)
+    linked: Dict[str, Entity] = {}
+
+    for ent in db.query(Entity).all():
+        candidates = [ent.id, ent.name, *(ent.aliases_json or [])]
+        for candidate in candidates:
+            candidate_lower = str(candidate).lower()
+            candidate_id = normalize_entity_id(str(candidate))
+            if candidate_lower in query_lower or candidate_id in normalized_query:
+                linked[ent.id] = ent
+                break
+
+    return sorted(linked.values(), key=lambda ent: len(ent.name), reverse=True)
+
+
+def metadata_matches_filters(doc_metadata: Dict[str, Any], settings: Any) -> bool:
+    if not settings:
+        return True
+
+    filter_map = {
+        "continuity_filter": "continuity",
+        "canon_status_filter": "canon_status",
+        "universe_filter": "universe",
+        "earth_filter": "earth",
+        "knowledge_type_filter": "knowledge_type",
+    }
+    for setting_name, metadata_key in filter_map.items():
+        expected = getattr(settings, setting_name, None)
+        if not expected:
+            continue
+        actual = doc_metadata.get(metadata_key)
+        if actual is None:
+            return False
+        if str(actual).lower() != str(expected).lower():
+            return False
+    return True
+
+
 def check_spoiler_filter(doc_metadata: Dict[str, Any], settings: Any, db: Session) -> bool:
     """
     Returns True if the document is allowed under the current user settings,
@@ -127,6 +174,11 @@ def check_spoiler_filter(doc_metadata: Dict[str, Any], settings: Any, db: Sessio
 
     return True
 
+
+def document_allowed(doc: Document, settings: Any, db: Session) -> bool:
+    metadata = doc.metadata_json or {}
+    return check_spoiler_filter(metadata, settings, db) and metadata_matches_filters(metadata, settings)
+
 def search_knowledge_graph(query: str, db: Session) -> List[Dict[str, Any]]:
     """
     Searches the Entity Relationship knowledge graph for matches.
@@ -135,20 +187,7 @@ def search_knowledge_graph(query: str, db: Session) -> List[Dict[str, Any]]:
     results = []
     query_lower = query.lower()
     
-    # Simple entity identification rules
-    entities = db.query(Entity).all()
-    matched_entity_ids = []
-    for ent in entities:
-        # Check if name or aliases are in the query
-        name_matched = ent.name.lower() in query_lower
-        alias_matched = False
-        if ent.aliases_json:
-            for alias in ent.aliases_json:
-                if alias.lower() in query_lower:
-                    alias_matched = True
-                    break
-        if name_matched or alias_matched:
-            matched_entity_ids.append(ent.id)
+    matched_entity_ids = [entity.id for entity in link_query_entities(query, db)]
             
     if not matched_entity_ids:
         return results
@@ -243,8 +282,7 @@ def search_documents_fts(query: str, settings: Any, db: Session) -> List[Documen
     # Apply spoiler filtering
     filtered_results = []
     for doc in results:
-        metadata = doc.metadata_json or {}
-        if check_spoiler_filter(metadata, settings, db):
+        if document_allowed(doc, settings, db):
             filtered_results.append(doc)
             
     return filtered_results
@@ -268,7 +306,7 @@ def hybrid_search_documents(query: str, settings: Any, db: Session, top_k: int =
     # Add vector results (already spoiler filtered in search/check_spoiler)
     for doc, score in vector_results:
         # Re-verify spoiler filter just in case
-        if check_spoiler_filter(doc.metadata_json or {}, settings, db):
+        if document_allowed(doc, settings, db):
             merged[doc.id] = (doc, score)
             
     # Add/merge FTS results
@@ -284,6 +322,25 @@ def hybrid_search_documents(query: str, settings: Any, db: Session, top_k: int =
     # Sort by score descending
     sorted_results = sorted(merged.values(), key=lambda x: x[1], reverse=True)
     return sorted_results[:top_k]
+
+
+def search_exact_entity_documents(
+    linked_entities: List[Entity],
+    settings: Any,
+    db: Session,
+) -> List[Tuple[Document, float]]:
+    results: List[Tuple[Document, float]] = []
+    seen = set()
+    for entity in linked_entities:
+        candidates = db.query(Document).filter(Document.title.ilike(entity.name)).limit(5).all()
+        if not candidates:
+            candidates = db.query(Document).filter(Document.title.ilike(f"%{entity.name}%")).limit(5).all()
+        for doc in candidates:
+            if doc.id in seen or not document_allowed(doc, settings, db):
+                continue
+            seen.add(doc.id)
+            results.append((doc, 0.95))
+    return results
 
 
 class HybridSearcher:
@@ -303,26 +360,45 @@ class HybridSearcher:
         intent = detect_intent(query)
         expanded_queries = expand_query(query)
         merged: Dict[str, RetrievalResult] = {}
+        linked_entities = link_query_entities(query, db)
 
         graph_results = search_knowledge_graph(query, db)
         for result in graph_results_to_retrieval_results(graph_results):
             merged[result.document_id] = result
 
+        for doc, score in search_exact_entity_documents(linked_entities, settings, db):
+            merged[doc.id] = RetrievalResult(
+                document_id=doc.id,
+                title=doc.title,
+                category=doc.category,
+                content=doc.content,
+                score=score,
+                source_type="entity_exact",
+                metadata={
+                    **(doc.metadata_json or {}),
+                    "file_path": doc.file_path,
+                    "linked_entities": [entity.id for entity in linked_entities],
+                    "reason": "Boosted because the question directly named this entity or one of its aliases.",
+                },
+            )
+
         for expanded_query in expanded_queries:
             for doc, score in hybrid_search_documents(expanded_query, settings, db, top_k=top_k):
                 existing = merged.get(doc.id)
+                boosted_score = _entity_boosted_score(doc, score, linked_entities)
                 result = RetrievalResult(
                     document_id=doc.id,
                     title=doc.title,
                     category=doc.category,
                     content=doc.content,
-                    score=score,
+                    score=boosted_score,
                     source_type="hybrid",
                     metadata={
                         **(doc.metadata_json or {}),
                         "file_path": doc.file_path,
                         "query_variant": expanded_query,
-                        "reason": "Matched semantic vector search, keyword search, or both.",
+                        "linked_entities": [entity.id for entity in linked_entities],
+                        "reason": _retrieval_reason(doc, score, boosted_score),
                     },
                 )
                 if not existing or result.score > existing.score:
@@ -341,3 +417,21 @@ class HybridSearcher:
                 f"{result.content[:900]}"
             )
         return "\n\n".join(context_parts)
+
+
+def _entity_boosted_score(doc: Document, score: float, linked_entities: List[Entity]) -> float:
+    title = doc.title.lower()
+    content = doc.content.lower()
+    for entity in linked_entities:
+        names = [entity.name, *(entity.aliases_json or [])]
+        if any(str(name).lower() == title for name in names):
+            return min(score + 0.25, 1.0)
+        if any(str(name).lower() in title or str(name).lower() in content[:500] for name in names):
+            return min(score + 0.15, 1.0)
+    return score
+
+
+def _retrieval_reason(doc: Document, original_score: float, boosted_score: float) -> str:
+    if boosted_score > original_score:
+        return "Matched hybrid retrieval and received an entity-linking boost."
+    return "Matched semantic vector search, keyword search, or both."

@@ -11,6 +11,11 @@ class ChatSettingsSchema(BaseModel):
     spoiler_preference: str = "full"  # none, partial, full
     watched_up_to_movie: Optional[str] = None
     watched_up_to_series: Optional[str] = None
+    continuity_filter: Optional[str] = None
+    canon_status_filter: Optional[str] = None
+    universe_filter: Optional[str] = None
+    earth_filter: Optional[str] = None
+    knowledge_type_filter: Optional[str] = None
     language: str = "en"
 
     model_config = ConfigDict(from_attributes=True)
